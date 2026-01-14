@@ -1,1 +1,2 @@
-# 2.2-IP
+# Forest Farers
+A VR Educational game by SmthCheesy
