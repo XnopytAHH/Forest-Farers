@@ -1,7 +1,7 @@
 /*
 * TransitionManager.cs
 * Author: Lim En Xu Jayson
-* Date Created: 2023/09/15
+* Date Created: 19/01/2026
 * Description: Manages scene transitions with a step effect using a shader material.
 */
 using UnityEngine;
