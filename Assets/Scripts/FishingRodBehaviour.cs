@@ -45,13 +45,19 @@ public class FishingRodBehaviour : MonoBehaviour
     /// </summary>
     public bool isBobberCast = false;
     /// <summary>
+    /// Bool to check if the bobber is currently reeling in.
+    /// </summary>
+    public bool isReelingIn = false;
+    /// <summary>
     /// Maximum distance the bobber can be from the rod tip.
     /// </summary>
     [SerializeField]
-    float maxDistance = 5.0f;
+    float maxDistance;
+    Vector3 offset;
     private void Start() {
         fishingRodRB = GetComponent<Rigidbody>();
         fishingLine = GetComponent<LineRenderer>();
+        offset = rodTip.transform.localPosition;
     }
     bool isTrackingEnabled = false;
     public void enableTracking()
@@ -64,17 +70,20 @@ public class FishingRodBehaviour : MonoBehaviour
         previousPositions = new Vector3[4];
         Debug.Log("Disabling tracking");
         isTrackingEnabled = false;
-        Uncast();
+        ReturnToRod();
+    }
+    private void FixedUpdate() {
+        rodTip.GetComponent<Rigidbody>().MovePosition(gameObject.transform.TransformPoint(offset));
+        rodTip.GetComponent<Rigidbody>().MoveRotation(gameObject.transform.rotation);
     }
     private void Update() {
         fishingLine.SetPosition(0, rodTip.transform.position);
         fishingLine.SetPosition(1, fishingRodBobber.transform.position);
-        if (isTrackingEnabled)
+        if (isTrackingEnabled && !isBobberCast && !isReelingIn)
         {
             
             Vector3 rodVelocity = fishingRodRB.linearVelocity;
             float speed = Vector3.Dot(rodVelocity, transform.forward);
-            float angularSpeed = rodTip.GetComponent<Rigidbody>().angularVelocity.magnitude;
             if (speed < 0)  speed = 0;
             if (speed > castThreshold && !isBobberCast)
             {
@@ -82,12 +91,25 @@ public class FishingRodBehaviour : MonoBehaviour
                 Cast();
             }
         }
+        if (isTrackingEnabled && isBobberCast && !isReelingIn)
+        {
+            Vector3 rodVelocity = fishingRodRB.linearVelocity;
+            float speed = Vector3.Dot(rodVelocity, transform.forward);
+            if (speed > 0)  speed = 0;
+            
+            if (-speed > castThreshold)
+            {
+                Debug.Log("Casting detected with speed: " + speed);
+                Uncast();
+            }
+        }
+        
     }
     void Cast()
     {
         //Get angle of the cast
         Vector3 castDirection = gameObject.transform.forward + fishingRodRB.linearVelocity * 0.5f;
-        
+        fishingRodBobber.GetComponent<ConfigurableJoint>().linearLimit = new SoftJointLimit { limit = maxDistance };
         //throw bobber using angle of cast
         Debug.Log("Casting in direction: " + castDirection.normalized);
         fishingRodBobber.GetComponent<Rigidbody>().isKinematic = false;
@@ -99,10 +121,31 @@ public class FishingRodBehaviour : MonoBehaviour
     }
     void Uncast()
     {
+        Vector3 returnDirection = (rodTip.transform.position - fishingRodBobber.transform.position).normalized;
+        isReelingIn = true;
+        StartCoroutine(ReelInBobber());
+    }
+    void ReturnToRod()
+    {
         fishingRodBobber.GetComponent<Rigidbody>().isKinematic = true;
         fishingRodBobber.GetComponent<Rigidbody>().useGravity = false;
         fishingRodBobber.transform.parent = rodTip.transform;
         fishingRodBobber.transform.localPosition = new Vector3(0, 0, 0);
         isBobberCast = false;
+        
     }
+    IEnumerator ReelInBobber()
+    {
+        float distanceLeft = maxDistance;
+        while (distanceLeft > 2)
+        {
+            distanceLeft -= 0.3f;
+            fishingRodBobber.GetComponent<ConfigurableJoint>().linearLimit = new SoftJointLimit { limit = distanceLeft };
+            yield return new WaitForSeconds(0.01f);
+        }
+        ReturnToRod();
+        yield return new WaitForSeconds(0.5f);
+        isReelingIn = false;
+    }
+
 }
