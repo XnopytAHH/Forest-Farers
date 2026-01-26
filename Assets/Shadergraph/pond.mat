@@ -67,14 +67,14 @@ Material:
     - _QueueOffset: 0
     - _clamp_max: 0.67
     - _depth: 1.04
-    - _displacement: 0.1
+    - _displacement: -0
     - _foam_depth: 1.18
     - _foam_strength: 0
     - _foam_tile: 1.32
     - _normal_strength: 4.54
     - _smoothness: 0.87
     - _strength: 0.28
-    - _wave_speed: 0.3
+    - _wave_speed: 0.02
     m_Colors:
     - _deep_colour: {r: 0.039067253, g: 0.13458775, b: 0.3509434, a: 0.73333335}
     - _normal_uv: {r: 4.3, g: 3.57, b: 0, a: 0}

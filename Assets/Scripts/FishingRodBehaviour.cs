@@ -6,6 +6,7 @@
 */
 using UnityEngine;
 using System.Collections;
+using Unity.Mathematics;
 public class FishingRodBehaviour : MonoBehaviour
 {
     /// <summary>
@@ -26,15 +27,6 @@ public class FishingRodBehaviour : MonoBehaviour
     /// </summary>
     [SerializeField]
     float castThreshold = 2.0f;
-    /// <summary>
-    /// Threshold angular speed to detect a cast action.
-    /// </summary>
-    [SerializeField]
-    float angularCastThreshold = 1.0f;
-    /// <summary>
-    /// Array to store previous positions of the rod tip for casting direction calculation.
-    /// </summary>
-    public Vector3[] previousPositions = new Vector3[4];
     /// <summary>
     /// Reference to the fishing rod bobber object.
     /// </summary>
@@ -68,7 +60,6 @@ public class FishingRodBehaviour : MonoBehaviour
     }
     public void disableTracking()
     {
-        previousPositions = new Vector3[4];
         Debug.Log("Disabling tracking");
         isTrackingEnabled = false;
         ReturnToRod();
@@ -100,7 +91,6 @@ public class FishingRodBehaviour : MonoBehaviour
             
             if (-speed > castThreshold)
             {
-                Debug.Log("Casting detected with speed: " + speed);
                 Uncast();
             }
         }
@@ -117,6 +107,8 @@ public class FishingRodBehaviour : MonoBehaviour
         fishingRodBobber.GetComponent<Rigidbody>().useGravity = true;
         fishingRodBobber.transform.parent = null;
         isBobberCast = true;
+        // fishingRodBobber.transform.rotation = quaternion.identity;
+        //fishingRodBobber.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 
     }
     void Uncast()
@@ -124,6 +116,8 @@ public class FishingRodBehaviour : MonoBehaviour
         Vector3 returnDirection = (rodTip.transform.position - fishingRodBobber.transform.position).normalized;
         isReelingIn = true;
         StartCoroutine(ReelInBobber());
+        //fishingRodBobber.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+
     }
     void ReturnToRod()
     {
