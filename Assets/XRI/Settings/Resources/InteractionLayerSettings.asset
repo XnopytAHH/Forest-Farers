@@ -19,8 +19,8 @@ MonoBehaviour:
   - Pot
   - Fish
   - Peg
-  - 
-  - 
+  - NonInteractable
+  - NonInteractableSkinny
   - 
   - 
   - 

@@ -40,6 +40,10 @@ public class FishingRodBehaviour : MonoBehaviour
     /// Bool to check if the bobber is currently reeling in.
     /// </summary>
     public bool isReelingIn = false;
+    ///<summary>
+    /// Bool to check if the bobber is waiting for a fish to bite.
+    /// </summary>
+    public bool isWaitingForBite = false;
     /// <summary>
     /// Maximum distance the bobber can be from the rod tip.
     /// </summary>
@@ -94,6 +98,11 @@ public class FishingRodBehaviour : MonoBehaviour
                 Uncast();
             }
         }
+        if (fishingRodBobber.GetComponent<Bouyancy>().isUnderwater && !isWaitingForBite  && isBobberCast)
+        {
+            isWaitingForBite = true;
+        }
+
         
     }
     void Cast(float velocity)
@@ -137,6 +146,12 @@ public class FishingRodBehaviour : MonoBehaviour
         ReturnToRod();
         yield return new WaitForSeconds(0.5f);
         isReelingIn = false;
+    }
+
+    IEnumerator SpawnFishAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        // Spawn fish logic here
     }
 
 }
