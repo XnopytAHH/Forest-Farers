@@ -7,6 +7,8 @@
 using UnityEngine;
 using System.Collections;
 using Unity.Mathematics;
+using System;
+using Unity.VisualScripting;
 public class FishingRodBehaviour : MonoBehaviour
 {
     /// <summary>
@@ -31,7 +33,7 @@ public class FishingRodBehaviour : MonoBehaviour
     /// Reference to the fishing rod bobber object.
     /// </summary>
     [SerializeField]
-    GameObject fishingRodBobber;
+    public GameObject fishingRodBobber;
     /// <summary>
     /// Bool to check if the bobber is currently cast.
     /// </summary>
@@ -49,6 +51,25 @@ public class FishingRodBehaviour : MonoBehaviour
     /// </summary>
     [SerializeField]
     float maxDistance;
+    /// <summary>
+    /// Prefab of the fish in the water.
+    /// </summary>
+    [SerializeField]
+    GameObject fishInWaterPrefab;
+    /// <summary>
+    /// Prefab of the fish to spawn when a fish bites.
+    /// </summary>
+    [SerializeField]
+    GameObject fishPrefab;
+    /// <summary>
+    /// Event triggered when the fishing rod is uncast.
+    /// </summary>
+    public static event Action rodUncast;
+    /// <summary>
+    /// Offset Bounds for the fish spawn position.
+    /// </summary>
+    public Vector2 fishSpawnOffsetBounds;
+
     Vector3 offset;
     bool isTrackingEnabled = false;
     private void Start() {
@@ -67,6 +88,10 @@ public class FishingRodBehaviour : MonoBehaviour
         Debug.Log("Disabling tracking");
         isTrackingEnabled = false;
         ReturnToRod();
+        isWaitingForBite = false;
+        
+        rodUncast?.Invoke();
+        StopAllCoroutines();
     }
     private void FixedUpdate() {
         rodTip.GetComponent<Rigidbody>().MovePosition(gameObject.transform.TransformPoint(offset));
@@ -101,6 +126,8 @@ public class FishingRodBehaviour : MonoBehaviour
         if (fishingRodBobber.GetComponent<Bouyancy>().isUnderwater && !isWaitingForBite  && isBobberCast)
         {
             isWaitingForBite = true;
+            StartCoroutine(SpawnFishAfterDelay(UnityEngine.Random.Range(3f, 8f)));
+            
         }
 
         
@@ -124,9 +151,11 @@ public class FishingRodBehaviour : MonoBehaviour
     {
         Vector3 returnDirection = (rodTip.transform.position - fishingRodBobber.transform.position).normalized;
         isReelingIn = true;
+        isWaitingForBite = false;
+        StopAllCoroutines();
         StartCoroutine(ReelInBobber());
         //fishingRodBobber.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-
+        rodUncast?.Invoke();
     }
     void ReturnToRod()
     {
@@ -150,8 +179,21 @@ public class FishingRodBehaviour : MonoBehaviour
 
     IEnumerator SpawnFishAfterDelay(float delay)
     {
+        // Wait for 1 second to ensure bobber is stable in water
+        yield return new WaitForSeconds(1f);
+        if (!fishingRodBobber.GetComponent<Bouyancy>().isUnderwater)
+        {
+            yield break;
+        }
         yield return new WaitForSeconds(delay);
-        // Spawn fish logic here
+        Vector3 randomOffset = new Vector3(UnityEngine.Random.Range(fishSpawnOffsetBounds.x, fishSpawnOffsetBounds.y), 0, UnityEngine.Random.Range(fishSpawnOffsetBounds.x, fishSpawnOffsetBounds.y));
+        Vector3 spawnPosition = fishingRodBobber.transform.position + randomOffset;
+        GameObject fish =  Instantiate(fishInWaterPrefab, spawnPosition, Quaternion.identity);
+        fish.GetComponent<FishInWaterBehaviour>().fishingRod = gameObject;
+    }
+    public void FishBite()
+    {
+        Instantiate(fishPrefab, fishingRodBobber.transform.position, Quaternion.identity);
     }
 
 }

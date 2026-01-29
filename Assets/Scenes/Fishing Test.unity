@@ -1071,32 +1071,6 @@ MonoBehaviour:
   m_Teleporting:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &1290548251 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2677107254907739201, guid: c403962111a23fe499f00c38d472e69b, type: 3}
-  m_PrefabInstance: {fileID: 3081190993610273001}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1290548252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1290548251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c4775f883bbd8e48a5cb5f0bb7c6798, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bouyancy
-  underWaterDrag: 6
-  underWaterAngularDrag: 1
-  airDrag: 0
-  airAngularDrag: 0.05
-  bouyancyForce: 45
-  waterPlane: {fileID: 1670669430}
-  isUnderwater: 0
-  aroundWater: 0
-  waterOffset: -0.136
 --- !u!1 &1376348507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,21 +1585,18 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.04
       objectReference: {fileID: 0}
+    - target: {fileID: 8195386511489884068, guid: c403962111a23fe499f00c38d472e69b, type: 3}
+      propertyPath: waterPlane
+      value: 
+      objectReference: {fileID: 1670669430}
     - target: {fileID: 8803758891966234304, guid: c403962111a23fe499f00c38d472e69b, type: 3}
       propertyPath: m_Mass
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8803758891966234304, guid: c403962111a23fe499f00c38d472e69b, type: 3}
-      propertyPath: m_Constraints
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2677107254907739201, guid: c403962111a23fe499f00c38d472e69b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1290548252}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c403962111a23fe499f00c38d472e69b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

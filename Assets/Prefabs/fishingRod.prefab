@@ -100,15 +100,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d777ded9b5fbefc41ab653726cc84f11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.434
+      value: -37.33
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d777ded9b5fbefc41ab653726cc84f11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00092
+      value: 0.259
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d777ded9b5fbefc41ab653726cc84f11, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.59317
+      value: -12.21
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d777ded9b5fbefc41ab653726cc84f11, type: 3}
       propertyPath: m_LocalRotation.w
@@ -428,15 +428,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   rodTip: {fileID: 209969833376616108}
   castThreshold: 7
-  angularCastThreshold: 1
-  previousPositions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
   fishingRodBobber: {fileID: 2677107254907739201}
   isBobberCast: 0
   isReelingIn: 0
+  isWaitingForBite: 0
   maxDistance: 10
 --- !u!120 &2053787069418486850
 LineRenderer:
@@ -626,6 +621,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e472853e1d3d5b74b84a57cc8ef331a2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3133143501010690843}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e472853e1d3d5b74b84a57cc8ef331a2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8195386511489884068}
   m_SourcePrefab: {fileID: 100100000, guid: e472853e1d3d5b74b84a57cc8ef331a2, type: 3}
 --- !u!1 &2677107254907739201 stripped
 GameObject:
@@ -651,7 +649,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.03
+  m_Radius: 0.04
   m_Center: {x: 0.0042608464, y: 0.027563853, z: -0.0009441767}
 --- !u!54 &8803758891966234304
 Rigidbody:
@@ -661,7 +659,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2677107254907739201}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -782,6 +780,27 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &8195386511489884068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677107254907739201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c4775f883bbd8e48a5cb5f0bb7c6798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bouyancy
+  underWaterDrag: 6
+  underWaterAngularDrag: 1
+  airDrag: 0
+  airAngularDrag: 0.05
+  bouyancyForce: 45
+  waterPlane: {fileID: 0}
+  isUnderwater: 0
+  aroundWater: 0
+  waterOffset: -0.136
 --- !u!4 &3345381164575999739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e472853e1d3d5b74b84a57cc8ef331a2, type: 3}
