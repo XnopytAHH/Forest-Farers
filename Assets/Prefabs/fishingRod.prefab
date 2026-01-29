@@ -141,7 +141,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d777ded9b5fbefc41ab653726cc84f11, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: c75149b7e03f2c347839dff67a231c69, type: 2}
+      objectReference: {fileID: 2100000, guid: c1682b74d4d4aa142a07526c2bb7fcd5, type: 2}
     - target: {fileID: 919132149155446097, guid: d777ded9b5fbefc41ab653726cc84f11, type: 3}
       propertyPath: m_Name
       value: fishingRod
@@ -433,6 +433,9 @@ MonoBehaviour:
   isReelingIn: 0
   isWaitingForBite: 0
   maxDistance: 10
+  fishInWaterPrefab: {fileID: 0}
+  fishPrefab: {fileID: 0}
+  fishSpawnOffsetBounds: {x: 0, y: 0}
 --- !u!120 &2053787069418486850
 LineRenderer:
   serializedVersion: 3

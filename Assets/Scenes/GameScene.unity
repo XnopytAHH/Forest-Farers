@@ -532,6 +532,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7947911426237599054, guid: 3a8943c810fec7549bda33ac95329e93, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7947911426237599054, guid: 3a8943c810fec7549bda33ac95329e93, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c1682b74d4d4aa142a07526c2bb7fcd5, type: 2}
     - target: {fileID: 8452230815769078939, guid: 3a8943c810fec7549bda33ac95329e93, type: 3}
       propertyPath: m_Name
       value: displayLog
@@ -1539,6 +1547,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7947911426237599054, guid: 3a8943c810fec7549bda33ac95329e93, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7947911426237599054, guid: 3a8943c810fec7549bda33ac95329e93, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c1682b74d4d4aa142a07526c2bb7fcd5, type: 2}
     - target: {fileID: 8452230815769078939, guid: 3a8943c810fec7549bda33ac95329e93, type: 3}
       propertyPath: m_Name
       value: displayLog (1)
@@ -4124,6 +4140,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2807631332002617993, guid: 785c54e93544169489a551839eb37cb3, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2807631332002617993, guid: 785c54e93544169489a551839eb37cb3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c1682b74d4d4aa142a07526c2bb7fcd5, type: 2}
     - target: {fileID: 3944477136208404966, guid: 785c54e93544169489a551839eb37cb3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.55
@@ -4418,6 +4442,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2807631332002617993, guid: 785c54e93544169489a551839eb37cb3, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2807631332002617993, guid: 785c54e93544169489a551839eb37cb3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c1682b74d4d4aa142a07526c2bb7fcd5, type: 2}
     - target: {fileID: 3944477136208404966, guid: 785c54e93544169489a551839eb37cb3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.62
@@ -4682,6 +4714,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2807631332002617993, guid: 785c54e93544169489a551839eb37cb3, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2807631332002617993, guid: 785c54e93544169489a551839eb37cb3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c1682b74d4d4aa142a07526c2bb7fcd5, type: 2}
     - target: {fileID: 3944477136208404966, guid: 785c54e93544169489a551839eb37cb3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.809999
@@ -5155,6 +5195,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7947911426237599054, guid: 3a8943c810fec7549bda33ac95329e93, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7947911426237599054, guid: 3a8943c810fec7549bda33ac95329e93, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c1682b74d4d4aa142a07526c2bb7fcd5, type: 2}
     - target: {fileID: 8452230815769078939, guid: 3a8943c810fec7549bda33ac95329e93, type: 3}
       propertyPath: m_Name
       value: log (3)
