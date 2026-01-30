@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e472853e1d3d5b74b84a57cc8ef331a2
+guid: c9db98b5dd3783f47a3f06358c897e3b
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: textat3
-    second: {fileID: 2100000, guid: b243eaa2d8e09354cac4a1f9f441d51d, type: 2}
+      name: textureat2
+    second: {fileID: 2100000, guid: c1682b74d4d4aa142a07526c2bb7fcd5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
