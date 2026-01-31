@@ -6,7 +6,10 @@ public class hammerBehavior : MonoBehaviour
     GameObject hammerHead;
     Vector3 offset;
     bool canDrive = false;
+    bool isContactingPeg = false;
     bool isTrackingEnabled = false;
+    [SerializeField]
+    float speedThreshold = 5f;
     void Start()
     {
         if (hammerHead == null)
@@ -29,21 +32,17 @@ public class hammerBehavior : MonoBehaviour
     {
         hammerHead.GetComponent<Rigidbody>().MovePosition(gameObject.transform.TransformPoint(offset));
         hammerHead.GetComponent<Rigidbody>().MoveRotation(gameObject.transform.rotation);
-    
-    }
-
-    void Update()
-    {
         if (isTrackingEnabled)
         {
             Vector3 hammerVelocity = hammerHead.GetComponent<Rigidbody>().linearVelocity;
             float speed = Vector3.Dot(hammerVelocity, -transform.right);
-            if (speed > 5f && !canDrive)
+            
+            if (speed > speedThreshold && !canDrive)
             {
                 canDrive = true;
                 Debug.Log("Hammer is in driving position with speed: " + speed);
             }
-            else if (speed <= 5f && canDrive)
+            if (speed <= speedThreshold && canDrive)
             {
                 canDrive = false;
                 Debug.Log("Hammer is no longer in driving position.");
@@ -51,11 +50,25 @@ public class hammerBehavior : MonoBehaviour
         }
     }
 
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Peg") && canDrive)
         {
-            collision.gameObject.GetComponent<PegBehavior>().DrivePeg();
+            if(!isContactingPeg)
+            {
+                isContactingPeg = true;
+                collision.gameObject.GetComponent<PegBehavior>().DrivePeg();
+                Debug.Log("Hammer collided with peg while in driving position.");
+            }
+            
+        }
+    }
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Peg"))
+        {
+            isContactingPeg = false;
         }
     }
 }

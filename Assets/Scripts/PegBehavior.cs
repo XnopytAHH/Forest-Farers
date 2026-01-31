@@ -4,6 +4,7 @@ using UnityEngine;
 public class PegBehavior : MonoBehaviour
 {
     float progress = 0f;
+    public GameObject pegAnchorPoint;
     public void DrivePeg()
     {
         if (progress < 3f)
@@ -18,17 +19,21 @@ public class PegBehavior : MonoBehaviour
     }
     private void Change()
     {
+        Debug.Log("Peg progress: " + progress);
         if (progress == 1f)
         {
-            GetComponent<Renderer>().material.color = Color.yellow;
+            
+            pegAnchorPoint.transform.position = pegAnchorPoint.transform.position + new Vector3(0f, -0.05f, 0f);
         }
         else if (progress == 2f)
         {
-            GetComponent<Renderer>().material.color = Color.magenta;
+            
+            pegAnchorPoint.transform.position = pegAnchorPoint.transform.position + new Vector3(0f, -0.05f, 0f);
         }
         else if (progress >= 3f)
         {
-            GetComponent<Renderer>().material.color = Color.green;
+            
+            pegAnchorPoint.transform.position = pegAnchorPoint.transform.position + new Vector3(0f, -0.05f, 0f);
         }
     }
 }
