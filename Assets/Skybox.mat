@@ -33,9 +33,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Blend: 1
+    - _Blend: 0
     - _Exposure1: 1
-    - _Exposure2: 0.31
+    - _Exposure2: 1
     - _ImageType: 0
     - _Layout: 0
     - _MirrorOnBack: 0
