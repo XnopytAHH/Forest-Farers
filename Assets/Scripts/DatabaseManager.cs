@@ -44,6 +44,7 @@ public class DatabaseManager : MonoBehaviour
             DataSnapshot snapshot = task.Result;
             string json = snapshot.GetRawJsonValue();
             GameManager.Instance.currentUser = JsonUtility.FromJson<User>(json);
+            GameManager.Instance.currentUser.badges.UpdateBadgeValues();
         });
     }
 }
