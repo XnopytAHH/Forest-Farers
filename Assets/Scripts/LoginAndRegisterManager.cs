@@ -8,6 +8,8 @@ using UnityEngine;
 using TMPro;
 using Firebase.Auth;
 using Firebase.Extensions;
+using System.Linq.Expressions;
+using Firebase;
 public class LoginAndRegisterManager : MonoBehaviour
 {
     [SerializeField]
@@ -96,8 +98,25 @@ public class LoginAndRegisterManager : MonoBehaviour
                 Debug.Log("Login started");
                 if (task.IsCanceled || task.IsFaulted)
                 {
+                    var error = task.Exception.GetBaseException() as FirebaseException;
+                    var errorCode = (AuthError)error.ErrorCode;
+                    switch (errorCode)
+                    {
+                        case AuthError.InvalidEmail:
+                            ShowLoginError("Invalid email address");
+                            break;
+                        case AuthError.WrongPassword:
+                            ShowLoginError("Incorrect password");
+                            break;
+                        case AuthError.UserNotFound:
+                            ShowLoginError("No account found with this email");
+                            break;
+                        default:
+                            ShowLoginError(errorCode.ToString());
+                            break;
+                    }
                     if (task.Exception != null) Debug.Log(task.Exception);
-                    ShowLoginError("Error logging in");
+                    
                     return;
                 }
                 Debug.Log("Login successful");
@@ -113,13 +132,13 @@ public class LoginAndRegisterManager : MonoBehaviour
         var password = registerPasswordField.text;
         var displayName = usernameField.text;
 
-        // Input validation
+        
         if (!email.Contains("@") || !email.Contains("."))
         {
             ShowRegisterError("Empty or invalid e-mail address");
             return;
         }
-        // TODO: More validations
+        
         if (password == "")
         {
             ShowRegisterError("Password cannot be empty");
@@ -132,7 +151,7 @@ public class LoginAndRegisterManager : MonoBehaviour
         }
         else
         {
-            ShowRegisterError(""); // Clear error
+            ShowRegisterError(""); 
         }
 
         FirebaseAuth
@@ -142,7 +161,23 @@ public class LoginAndRegisterManager : MonoBehaviour
             {
                 if (task.IsCanceled || task.IsFaulted)
                 {
-                    ShowRegisterError("Error signing up");
+                    var error = task.Exception.GetBaseException() as FirebaseException;
+                    var errorCode = (AuthError)error.ErrorCode;
+                    switch (errorCode)
+                    {
+                        case AuthError.EmailAlreadyInUse:
+                            ShowRegisterError("Email already in use");
+                            break;
+                        case AuthError.InvalidEmail:
+                            ShowRegisterError("Invalid email address");
+                            break;
+                        case AuthError.WeakPassword:
+                            ShowRegisterError("Weak password");
+                            break;
+                        default:
+                            ShowRegisterError(errorCode.ToString());
+                            break;
+                    }
                     if (task.Exception != null) Debug.Log(task.Exception);
                     return;
                 }

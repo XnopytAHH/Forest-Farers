@@ -5,15 +5,15 @@ public class TentBagBehaviour : MonoBehaviour
     [SerializeField]
     GameObject[] tentItems;
     [SerializeField]
+    GameObject tentObject;
+    [SerializeField]
     GameObject spaceTester;
     bool thrownDown = false;
     bool waitingToPitch = false;
     void Start()
     {
-        foreach (GameObject item in tentItems)
-        {
-            item.SetActive(false);
-        }
+        tentObject.SetActive(false);
+        
         spaceTester.SetActive(false);
     }
 
@@ -64,12 +64,15 @@ public class TentBagBehaviour : MonoBehaviour
     IEnumerator pitchTentTimer()
     {
         yield return new WaitForSeconds(4f);
+        tentObject.SetActive(true);
+        tentObject.transform.parent = null;
         foreach (GameObject item in tentItems)
             {
-                item.transform.parent = null;
                 item.SetActive(true);
+                GameObject tentItem=Instantiate(item, transform.position + new Vector3(3f, 0f, 0f), Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f));
+                tentItem.SetActive(true);
             }
-            gameObject.SetActive(false);
+        gameObject.SetActive(false);
         waitingToPitch = false;
     }
 }
