@@ -125,6 +125,11 @@ public class LoginAndRegisterManager : MonoBehaviour
                 TransitionManager.Instance.ChangeScene("GameScene");
             });
     }
+    public void DevLogin()
+    {
+        DatabaseManager.Instance.RetrieveUser("sampleUser");
+        TransitionManager.Instance.ChangeScene("MenuScene");
+    }
     public void Signup()
     {
         // Obtain text from input fields
