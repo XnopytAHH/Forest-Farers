@@ -38,7 +38,7 @@ public class TransitionManager : MonoBehaviour
          if(startedStep)
          {
               startedStep = false;
-              ChangeScene("GameScene");
+              ChangeScene("MenuScene");
          }
    }
    public void ChangeScene(string sceneName)
@@ -49,8 +49,8 @@ public class TransitionManager : MonoBehaviour
 
     IEnumerator StepTransition(string sceneName)
     {
-        //AsyncOperation sceneLoader= SceneManager.LoadSceneAsync(sceneName);
-        //sceneLoader.allowSceneActivation = false;
+        AsyncOperation sceneLoader= SceneManager.LoadSceneAsync(sceneName);
+        sceneLoader.allowSceneActivation = false;
         transitionMaterial.SetFloat("_Step", 0f);
         float stepValue = 0f;
         while (stepValue < 1f)
@@ -59,8 +59,8 @@ public class TransitionManager : MonoBehaviour
             transitionMaterial.SetFloat("_Step", stepValue);
             yield return new WaitForSeconds(transitionSpeed);
         }
-        //sceneLoader.allowSceneActivation = true;
-        //yield return new WaitUntil(() => sceneLoader.isDone);
+        sceneLoader.allowSceneActivation = true;
+        yield return new WaitUntil(() => sceneLoader.isDone);
         Debug.Log("Scene Loaded");
         stepValue = 1f;
         while (stepValue > 0f)
