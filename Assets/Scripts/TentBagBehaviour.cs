@@ -53,7 +53,7 @@ public class TentBagBehaviour : MonoBehaviour
     }
     public void OnTriggerStay(Collider other)
     {
-        if (!other.gameObject.CompareTag("Player"))
+        if (!other.gameObject.CompareTag("Player")&& !other.gameObject.CompareTag("CampfireVolume"))
         {
         Debug.Log("Trigger stay detected with " + other.gameObject.name);
         StopAllCoroutines();

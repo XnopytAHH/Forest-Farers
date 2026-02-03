@@ -9,6 +9,8 @@ TagManager:
   - Peg
   - Log
   - LogSkinny
+  - Campfire
+  - CampfireVolume
   layers:
   - Default
   - TransparentFX
