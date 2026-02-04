@@ -15,6 +15,7 @@ public class CampfireActivity : MonoBehaviour
 
     private bool firstGroupCompleted = false; // Flag to track if the first group is completed
     private bool activityCompleted = false; // Flag to track if the activity is completed
+    private bool usedWetLogs = false; // Flag to track if wet logs were used
 
     /// <summary>
     /// Called when the script is first initialized. Sets up initial state.
@@ -86,10 +87,22 @@ public class CampfireActivity : MonoBehaviour
                 grabInteractable.interactionLayers = InteractionLayerMask.GetMask("NonInteractable"); // Change its interaction layer to NonInteractable
                 Debug.Log("Changed interaction layer to NonInteractable for " + args.interactableObject.transform.name);
             }
+            else if (grabInteractable.tag == "WetLog")
+            {
+                grabInteractable.interactionLayers = InteractionLayerMask.GetMask("NonInteractable"); // Change its interaction layer to NonInteractable
+                Debug.Log("Changed interaction layer to NonInteractable for " + args.interactableObject.transform.name);
+                usedWetLogs = true;
+            }
             else if (grabInteractable.tag == "LogSkinny")
             {
                 grabInteractable.interactionLayers = InteractionLayerMask.GetMask("NonInteractableSkinny"); // Change its interaction layer to NonInteractable
                 Debug.Log("Changed interaction layer to NonInteractable for " + args.interactableObject.transform.name);
+            }
+            else if (grabInteractable.tag == "WetLogSkinny")
+            {
+                grabInteractable.interactionLayers = InteractionLayerMask.GetMask("NonInteractableSkinny"); // Change its interaction layer to NonInteractable
+                Debug.Log("Changed interaction layer to NonInteractable for " + args.interactableObject.transform.name);
+                usedWetLogs = true;
             }
         }
         activityCompleted = CheckCompletionStatus(); // Update the activity completion status based on campfire rows
@@ -132,7 +145,26 @@ public class CampfireActivity : MonoBehaviour
                     {
                         socket.gameObject.SetActive(true); // Activate the next row of sockets
                     }
-                    else fireEffect.gameObject.SetActive(true); // Activate the fire effect game object
+                    else
+                    {
+                        fireEffect.gameObject.SetActive(true); // Activate the fire effect game object
+                        if (usedWetLogs)
+                        {
+                            CampRun.Instance.EndCampfireTask("Bronze");
+                        }
+                        else
+                        {
+                            if(CampRun.Instance.currentTime <= CampRun.Instance.dayDuration - CampRun.Instance.nightThreshold)
+                            {
+                                CampRun.Instance.EndCampfireTask("Gold");
+                            }
+                            else
+                            {
+                                CampRun.Instance.EndCampfireTask("Silver");
+                            }
+                        }
+                    } 
+                    
                 }
 
             }
@@ -140,4 +172,6 @@ public class CampfireActivity : MonoBehaviour
         }
         return true;
     }
+
+    
 }

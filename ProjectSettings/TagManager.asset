@@ -11,6 +11,8 @@ TagManager:
   - LogSkinny
   - Campfire
   - CampfireVolume
+  - WetLog
+  - WetLogSkinny
   layers:
   - Default
   - TransparentFX

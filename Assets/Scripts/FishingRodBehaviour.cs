@@ -9,6 +9,8 @@ using System.Collections;
 using Unity.Mathematics;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.Rendering;
 public class FishingRodBehaviour : MonoBehaviour
 {
     /// <summary>
@@ -65,6 +67,7 @@ public class FishingRodBehaviour : MonoBehaviour
     /// Event triggered when the fishing rod is uncast.
     /// </summary>
     public static event Action rodUncast;
+
     /// <summary>
     /// Offset Bounds for the fish spawn position.
     /// </summary>
@@ -72,12 +75,16 @@ public class FishingRodBehaviour : MonoBehaviour
 
     Vector3 offset;
     bool isTrackingEnabled = false;
-    private void Start() {
+    public GameObject currentFish;
+    public GameObject currentFishInWater;
+    public Coroutine escapeCoroutine;
+    private void Start()
+    {
         fishingRodRB = GetComponent<Rigidbody>();
         fishingLine = GetComponent<LineRenderer>();
         offset = rodTip.transform.localPosition;
     }
-    
+
     public void enableTracking()
     {
         Debug.Log("Enabling tracking");
@@ -89,23 +96,25 @@ public class FishingRodBehaviour : MonoBehaviour
         isTrackingEnabled = false;
         ReturnToRod();
         isWaitingForBite = false;
-        
+
         rodUncast?.Invoke();
         StopAllCoroutines();
     }
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         rodTip.GetComponent<Rigidbody>().MovePosition(gameObject.transform.TransformPoint(offset));
         rodTip.GetComponent<Rigidbody>().MoveRotation(gameObject.transform.rotation);
     }
-    private void Update() {
+    private void Update()
+    {
         fishingLine.SetPosition(0, rodTip.transform.position);
         fishingLine.SetPosition(1, fishingRodBobber.transform.position);
         if (isTrackingEnabled && !isBobberCast && !isReelingIn)
         {
-            
+
             Vector3 rodVelocity = fishingRodRB.linearVelocity;
             float speed = Vector3.Dot(rodVelocity, transform.forward);
-            if (speed < 0)  speed = 0;
+            if (speed < 0) speed = 0;
             if (speed > castThreshold && !isBobberCast)
             {
                 Debug.Log("Casting detected with speed: " + speed);
@@ -116,21 +125,21 @@ public class FishingRodBehaviour : MonoBehaviour
         {
             Vector3 rodVelocity = fishingRodRB.linearVelocity;
             float speed = Vector3.Dot(rodVelocity, transform.forward);
-            if (speed > 0)  speed = 0;
-            
+            if (speed > 0) speed = 0;
+
             if (-speed > castThreshold)
             {
                 Uncast();
             }
         }
-        if (fishingRodBobber.GetComponent<Bouyancy>().isUnderwater && !isWaitingForBite  && isBobberCast)
+        if (fishingRodBobber.GetComponent<Bouyancy>().isUnderwater && !isWaitingForBite && isBobberCast)
         {
             isWaitingForBite = true;
             StartCoroutine(SpawnFishAfterDelay(UnityEngine.Random.Range(3f, 8f)));
-            
+
         }
 
-        
+
     }
     void Cast(float velocity)
     {
@@ -156,12 +165,17 @@ public class FishingRodBehaviour : MonoBehaviour
         StartCoroutine(ReelInBobber());
         //fishingRodBobber.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         rodUncast?.Invoke();
+        if (escapeCoroutine != null)
+        {
+            StopCoroutine(escapeCoroutine);
+        }
+        escapeCoroutine = null;
     }
     void ReturnToRod()
     {
         fishingRodBobber.GetComponent<ConfigurableJoint>().linearLimit = new SoftJointLimit { limit = 0.4f };
         isBobberCast = false;
-        
+
     }
     IEnumerator ReelInBobber()
     {
@@ -188,12 +202,20 @@ public class FishingRodBehaviour : MonoBehaviour
         yield return new WaitForSeconds(delay);
         Vector3 randomOffset = new Vector3(UnityEngine.Random.Range(fishSpawnOffsetBounds.x, fishSpawnOffsetBounds.y), 0, UnityEngine.Random.Range(fishSpawnOffsetBounds.x, fishSpawnOffsetBounds.y));
         Vector3 spawnPosition = fishingRodBobber.transform.position + randomOffset;
-        GameObject fish =  Instantiate(fishInWaterPrefab, spawnPosition, Quaternion.identity);
-        fish.GetComponent<FishInWaterBehaviour>().fishingRod = gameObject;
+        currentFishInWater = Instantiate(fishInWaterPrefab, spawnPosition, Quaternion.identity);
+        currentFishInWater.GetComponent<FishInWaterBehaviour>().fishingRod = gameObject;
     }
     public void FishBite()
     {
-        Instantiate(fishPrefab, fishingRodBobber.transform.position, Quaternion.identity);
+        currentFish = Instantiate(fishPrefab, fishingRodBobber.transform.position, Quaternion.identity);
+        escapeCoroutine = StartCoroutine(escapeTimer());    
+    }
+    IEnumerator escapeTimer()
+    {
+        yield return new WaitForSeconds(5f);
+        currentFish.GetComponent<FishBehaviour>().Escape();
+        currentFishInWater.GetComponent<FishInWaterBehaviour>().destroyFish();
+        isWaitingForBite = false;
     }
 
 }

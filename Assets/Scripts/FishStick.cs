@@ -19,7 +19,10 @@ public class FishStick : MonoBehaviour
         GameObject fish = socket.GetOldestInteractableSelected().transform.gameObject;
         FishBehaviour fishBehaviour = fish.GetComponent<FishBehaviour>();
         fishBehaviour.onStick = false;
-        
         fishBehaviour.hideUI();
+    }
+    public void disableTask()
+    {
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 }

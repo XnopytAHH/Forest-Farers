@@ -40,7 +40,7 @@ public class FishInWaterBehaviour : MonoBehaviour
             }
         }
     }
-    void destroyFish()
+    public void destroyFish()
     {
         Destroy(this.gameObject);
     }

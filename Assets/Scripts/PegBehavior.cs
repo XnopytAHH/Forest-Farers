@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PegBehavior : MonoBehaviour
 {
-    float progress = 0f;
+    public float progress = 0f;
     public GameObject pegAnchorPoint;
     public void DrivePeg()
     {

@@ -1,10 +1,10 @@
 using System;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class CampRun : MonoBehaviour
 {
-    float dayDuration = 600f; // Duration of a day in seconds
+    public float dayDuration = 600f; // Duration of a day in seconds
     public float currentTime = 0f; // Current time in the day
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField]
@@ -12,9 +12,21 @@ public class CampRun : MonoBehaviour
     [SerializeField]
     Material skyboxMaterial;
     [SerializeField]
-    float nightThreshold = 180f;
+    public float nightThreshold = 180f;
+    public float cookingFinishTime = 0f;
+    public float fishingFinishTime = 0f;
+    public float tentFinishTime = 0f;
+    public float campfireFinishTime = 0f;
+    public int cookingBadge = 0;
+    public int fishingBadge = 0;
+    public int tentBadge = 0;
+    public int campfireBadge = 0;
+    public static CampRun Instance;
+    public TentBehaviour tentBehaviour;
+
     void Start()
     {
+        Instance = this;
         skyboxMaterial.SetFloat("_Blend", 0f);
         currentTime = 0f;
     }
@@ -36,6 +48,10 @@ public class CampRun : MonoBehaviour
         sunSource.transform.rotation = Quaternion.Euler(new Vector3(sunAngle, 90f, 0f));
         float intensity = 1 - Mathf.Abs(normalizedTime - 0.5f) * 2;
         sunSource.GetComponent<Light>().intensity = intensity;
+        if (currentTime >= dayDuration)
+        {
+            FinishDayCycle();
+        }
 
     }
     void LerpSkyboxColor()
@@ -44,6 +60,87 @@ public class CampRun : MonoBehaviour
         float normalizedTime = (currentTime - nightTime) / nightThreshold; 
         skyboxMaterial.SetFloat("_Blend", normalizedTime);
     }
+    void FinishDayCycle()
+    {
+        // Calculate cooking score
+        float badgeMultiplier = 1f;
+        if (cookingBadge == 3)
+        {
+            badgeMultiplier = 2f;
+        }
+        else if (cookingBadge == 2)
+        {
+            badgeMultiplier = 1.5f;
+        }
+        else if (cookingBadge == 1)
+        {
+            badgeMultiplier = 1f;
+        }
+        float totalScore = (dayDuration-cookingFinishTime) * badgeMultiplier;
 
+        // Calculate tent score
+        tentBadge = tentBehaviour.CheckTentBadge();
+        tentFinishTime = currentTime;
+         badgeMultiplier = 1f;
+        if (tentBadge == 3)
+        {
+            badgeMultiplier = 2f;
+        }
+        else if (tentBadge == 2)
+        {
+            badgeMultiplier = 1.5f;
+        }
+        else if (tentBadge == 1)
+        {
+            badgeMultiplier = 1f;
+        }
+        totalScore += (dayDuration - tentFinishTime) * badgeMultiplier;
 
+        //Calculate fishing score
+
+        //Calculate campfire score
+    }
+    public void EndCookingTask(string badgeType)
+    {
+        cookingFinishTime = currentTime;
+        if(badgeType == "Gold")
+        {
+            cookingBadge = 3;
+            Debug.Log("Gold cooking badge awarded");
+        }
+        else if(badgeType == "Silver")
+        {
+            cookingBadge = 2;
+            Debug.Log("Silver cooking badge awarded");
+        }
+        else if(badgeType == "Bronze")
+        {
+            cookingBadge = 1;
+            Debug.Log("Bronze cooking badge awarded");
+        }
+        Debug.Log("Cooking task ended at time: " + cookingFinishTime);
+        
+    }
+    public void EndCampfireTask(string badgeType)
+    {
+        campfireFinishTime = currentTime;
+        if(badgeType == "Gold")
+        {
+            campfireBadge = 3;
+            Debug.Log("Gold campfire badge awarded");
+        }
+        else if(badgeType == "Silver")
+        {
+            campfireBadge = 2;
+            Debug.Log("Silver campfire badge awarded");
+        }
+        else if(badgeType == "Bronze")
+        {
+            campfireBadge = 1;
+            Debug.Log("Bronze campfire badge awarded");
+        }
+        Debug.Log("Campfire task ended at time: " + campfireFinishTime);
+        
+    }
+    
 }

@@ -4,6 +4,10 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Animations;
 using Unity.XR.CoreUtils;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using NUnit.Framework;
 
 public class FishBehaviour : MonoBehaviour
 {
@@ -17,12 +21,15 @@ public class FishBehaviour : MonoBehaviour
     [SerializeField] private float depthOffset = 0.1f;
     [SerializeField] private RectTransform successArea;
     [SerializeField] Material[] fishMaterials; // 0: raw, 1: cooked, 2: burnt
+    
     private void Start()
     {
+        hideUI();
         cookingSlider.value = 0f;
         cookingSlider.maxValue = cookingDuration[2];
         successArea.anchorMin = new Vector2(cookingDuration[0] / cookingDuration[2], successArea.anchorMin.y);
         successArea.anchorMax = new Vector2(cookingDuration[1] / cookingDuration[2], successArea.anchorMax.y);
+        
 
     }
     private void Update()
@@ -81,6 +88,7 @@ public class FishBehaviour : MonoBehaviour
         }
 
     }
+    
     void updateUI(float progress)
     {
         cookingSlider.value = progress;
@@ -90,13 +98,23 @@ public class FishBehaviour : MonoBehaviour
             GetComponent<Renderer>().material = fishMaterials[1];
             gameObject.GetNamedChild("eye_L").GetComponent<Renderer>().material = fishMaterials[1];
             gameObject.GetNamedChild("eye_R").GetComponent<Renderer>().material = fishMaterials[1];
+            CampRun.Instance.EndCookingTask("Gold");
         }
         else if (progress > cookingDuration[1] && progress <= cookingDuration[2])
         {
             // Overcooked
             GetComponent<Renderer>().material = fishMaterials[2];
             gameObject.GetNamedChild("eye_L").GetComponent<Renderer>().material = fishMaterials[2];
+            gameObject.GetNamedChild("eye_R").GetComponent<Renderer>().material = fishMaterials[2]; 
+            CampRun.Instance.EndCookingTask("Silver");
+        }
+        else if (progress > cookingDuration[2])
+        {
+            // Burnt
+            GetComponent<Renderer>().material = fishMaterials[2];
+            gameObject.GetNamedChild("eye_L").GetComponent<Renderer>().material = fishMaterials[2];
             gameObject.GetNamedChild("eye_R").GetComponent<Renderer>().material = fishMaterials[2];
+            CampRun.Instance.EndCookingTask("Bronze");
         }
         else
         {
@@ -105,5 +123,10 @@ public class FishBehaviour : MonoBehaviour
             gameObject.GetNamedChild("eye_L").GetComponent<Renderer>().material = fishMaterials[0];
             gameObject.GetNamedChild("eye_R").GetComponent<Renderer>().material = fishMaterials[0];
         }
+    }
+    
+    public void Escape()
+    {
+        Destroy(this.gameObject);
     }
 }

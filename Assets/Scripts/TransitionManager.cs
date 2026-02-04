@@ -38,7 +38,7 @@ public class TransitionManager : MonoBehaviour
          if(startedStep)
          {
               startedStep = false;
-              ChangeScene("MenuScene");
+              ChangeScene("GameScene");
          }
    }
    public void ChangeScene(string sceneName)
