@@ -47,4 +47,9 @@ public class DatabaseManager : MonoBehaviour
             GameManager.Instance.currentUser.badges.UpdateBadgeValues();
         });
     }
+    public void UpdateUserData(string userId, User userData)
+    {
+        string json = JsonUtility.ToJson(userData);
+        db.RootReference.Child("players").Child(userId).SetRawJsonValueAsync(json);
+    }
 }

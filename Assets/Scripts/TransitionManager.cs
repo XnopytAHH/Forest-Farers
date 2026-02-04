@@ -27,6 +27,7 @@ public class TransitionManager : MonoBehaviour
             
             transitionMaterial = image.material;
             transitionMaterial.SetFloat("_Step", 0f);
+            SceneManager.sceneLoaded += detectCamera;
          }
          else
          {
@@ -70,6 +71,11 @@ public class TransitionManager : MonoBehaviour
             yield return new WaitForSeconds(transitionSpeed);
         }
         
+    }
+    private void detectCamera(Scene scene, LoadSceneMode mode)
+    {
+        Camera mainCamera = Camera.main;
+        gameObject.GetComponent<Canvas>().worldCamera = mainCamera;
     }
 
 }

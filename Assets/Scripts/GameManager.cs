@@ -4,6 +4,7 @@
 * Date Created: 21/01/2026
 * Description: Overall game manager to handle cross scene requirements.
 */
+using Firebase.Database;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -85,6 +86,27 @@ public class GameManager : MonoBehaviour
         endDayScores[2] = tentBadge.ToString();
         endDayScores[3] = fishingBadge.ToString();
         endDayScores[4] = campfireBadge.ToString();
+        if ((int)totalScore > currentUser.highscore)
+        {
+            currentUser.highscore = (int)totalScore;
+        }
+        if (cookingBadge > currentUser.badges.cook)
+        {
+            currentUser.badges.cook = cookingBadge;
+        }
+        if (tentBadge > currentUser.badges.camper)
+        {
+            currentUser.badges.camper = tentBadge;
+        }
+        if (fishingBadge > currentUser.badges.angler)
+        {
+            currentUser.badges.angler = fishingBadge;
+        }
+        if (campfireBadge > currentUser.badges.backwoodsman)
+        {
+            currentUser.badges.backwoodsman = campfireBadge;
+        }
+        DatabaseManager.Instance.UpdateUserData(currentPlayerID, currentUser);
         SceneManager.LoadScene("DayEndScene");
 
     }

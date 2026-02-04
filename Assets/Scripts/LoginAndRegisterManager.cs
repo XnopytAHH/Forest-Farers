@@ -122,13 +122,16 @@ public class LoginAndRegisterManager : MonoBehaviour
                 Debug.Log("Login successful");
                 GameManager.Instance.currentPlayerID = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
                 DatabaseManager.Instance.RetrieveUser(GameManager.Instance.currentPlayerID);
-                TransitionManager.Instance.ChangeScene("GameScene");
+                TransitionManager.Instance.ChangeScene("MenuScene");
             });
     }
     public void DevLogin()
     {
-        DatabaseManager.Instance.RetrieveUser("sampleUser");
-        TransitionManager.Instance.ChangeScene("MenuScene");
+        var email = loginEmailField;
+        var password = loginPasswordField;
+        email.text="test@gmail.com";
+        password.text="testing";
+        Login();
     }
     public void Signup()
     {

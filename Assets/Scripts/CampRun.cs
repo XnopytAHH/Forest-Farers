@@ -1,5 +1,5 @@
 using System;
-
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CampRun : MonoBehaviour
@@ -83,7 +83,15 @@ public class CampRun : MonoBehaviour
         float totalScore = (dayDuration-cookingFinishTime) * badgeMultiplier;
 
         // Calculate tent score
-        tentBadge = tentBehaviour.CheckTentBadge();
+        if (tentBehaviour.gameObject.activeSelf)
+        {
+            tentBadge = tentBehaviour.CheckTentBadge();
+        }
+        else
+        {
+            tentBadge = 0;
+        }
+        
         tentFinishTime = currentTime;
          badgeMultiplier = 1f;
         if (tentBadge == 3)
