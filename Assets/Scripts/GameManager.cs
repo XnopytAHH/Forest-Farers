@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public string currentPlayerID;
     public User currentUser;
+    public string[] endDayScores;
     void Start()
     {
         if (Instance == null)
@@ -74,4 +75,18 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.activeSceneChanged -= CheckSceneRequirements;
     }
+    public void EndDay(float totalScore, int cookingBadge, int tentBadge, int fishingBadge, int campfireBadge)
+    {
+        Debug.Log("Ending day and returning to main menu.");
+        
+        endDayScores = new string[5];
+        endDayScores[0] = totalScore.ToString();
+        endDayScores[1] = cookingBadge.ToString();
+        endDayScores[2] = tentBadge.ToString();
+        endDayScores[3] = fishingBadge.ToString();
+        endDayScores[4] = campfireBadge.ToString();
+        SceneManager.LoadScene("DayEndScene");
+
+    }
+
 }

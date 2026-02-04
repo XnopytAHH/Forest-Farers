@@ -67,11 +67,12 @@ public class TentBagBehaviour : MonoBehaviour
         gameObject.SetActive(false);
         tentObject.SetActive(true);
         tentObject.transform.parent = null;
-        
+        float itemOffset = 0f;
         foreach (GameObject item in tentItems)
             {
+                itemOffset += 0.5f;
                 item.SetActive(true);
-                GameObject tentItem=Instantiate(item, transform.position + new Vector3(3f, 1f, 0f), Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f));
+                GameObject tentItem=Instantiate(item, transform.position + new Vector3(3f, 1f, itemOffset), Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f));
                 tentItem.SetActive(true);
             }
         

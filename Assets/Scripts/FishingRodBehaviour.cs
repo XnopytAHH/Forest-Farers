@@ -11,6 +11,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using UnityEngine.Rendering;
+using System.Threading.Tasks;
 public class FishingRodBehaviour : MonoBehaviour
 {
     /// <summary>
@@ -77,7 +78,12 @@ public class FishingRodBehaviour : MonoBehaviour
     bool isTrackingEnabled = false;
     public GameObject currentFish;
     public GameObject currentFishInWater;
+    public int escapeTimerDuration = 5;
     public Coroutine escapeCoroutine;
+    public int currentTimer = 0;
+    public bool completedTask = false;
+    public bool escaped = false;
+
     private void Start()
     {
         fishingRodRB = GetComponent<Rigidbody>();
@@ -168,6 +174,27 @@ public class FishingRodBehaviour : MonoBehaviour
         if (escapeCoroutine != null)
         {
             StopCoroutine(escapeCoroutine);
+            if (completedTask == false)
+            {
+                if (escaped == true)
+                {
+                    completedTask = true;
+                    CampRun.Instance.EndFishingTask("Bronze");
+                }
+                else
+                {
+                    if(currentTimer <= 2)
+                    {
+                        completedTask = true;
+                    CampRun.Instance.EndFishingTask("Gold");
+                    }
+                    else if (currentTimer > 2 && currentTimer <= 4)
+                    {
+                        completedTask = true;
+                        CampRun.Instance.EndFishingTask("Silver");
+                    }
+                }
+            }
         }
         escapeCoroutine = null;
     }
@@ -208,14 +235,21 @@ public class FishingRodBehaviour : MonoBehaviour
     public void FishBite()
     {
         currentFish = Instantiate(fishPrefab, fishingRodBobber.transform.position, Quaternion.identity);
-        escapeCoroutine = StartCoroutine(escapeTimer());    
+        escapeCoroutine = StartCoroutine(escapeTimer());
     }
     IEnumerator escapeTimer()
     {
-        yield return new WaitForSeconds(5f);
+        currentTimer = 0;
+        for (int i = 0; i < escapeTimerDuration; i++)
+        {
+            yield return new WaitForSeconds(1f);
+            ++currentTimer;
+        }
         currentFish.GetComponent<FishBehaviour>().Escape();
         currentFishInWater.GetComponent<FishInWaterBehaviour>().destroyFish();
         isWaitingForBite = false;
+        escaped = true;
+        escapeCoroutine = null;
     }
 
 }

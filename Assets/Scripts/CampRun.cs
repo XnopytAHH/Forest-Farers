@@ -33,9 +33,13 @@ public class CampRun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTime += Time.deltaTime;
+        if (currentTime <dayDuration)
+        {
+            currentTime += Time.deltaTime;
+            LerpSunPosition();
+        };
 
-        LerpSunPosition();
+        
         if (currentTime > dayDuration - nightThreshold)
         {
             LerpSkyboxColor();
@@ -97,8 +101,39 @@ public class CampRun : MonoBehaviour
         totalScore += (dayDuration - tentFinishTime) * badgeMultiplier;
 
         //Calculate fishing score
-
+        badgeMultiplier = 1f;
+        if (fishingBadge == 3)
+        {
+            badgeMultiplier = 2f;
+        }
+        else if (fishingBadge == 2)
+        {
+            badgeMultiplier = 1.5f;
+        }
+        else if (fishingBadge == 1)
+        {
+            badgeMultiplier = 1f;
+        }
+        totalScore += (dayDuration - fishingFinishTime) * badgeMultiplier;
         //Calculate campfire score
+        badgeMultiplier = 1f;
+        if (campfireBadge == 3)
+        {
+            badgeMultiplier = 2f;
+        }
+        else if (campfireBadge == 2)
+        {
+            badgeMultiplier = 1.5f;
+        }
+        else if (campfireBadge == 1)
+        {
+            badgeMultiplier = 1f;
+        }
+        totalScore += (dayDuration - campfireFinishTime) * badgeMultiplier;
+
+        Debug.Log("Day cycle finished! Total Score: " + totalScore);
+        Debug.Log("Cooking Badge: " + cookingBadge + ", Tent Badge: " + tentBadge + ", Fishing Badge: " + fishingBadge + ", Campfire Badge: " + campfireBadge);
+        GameManager.Instance.EndDay(totalScore, cookingBadge, tentBadge, fishingBadge, campfireBadge);
     }
     public void EndCookingTask(string badgeType)
     {
@@ -141,6 +176,26 @@ public class CampRun : MonoBehaviour
         }
         Debug.Log("Campfire task ended at time: " + campfireFinishTime);
         
+    }
+    public void EndFishingTask(string badgeType)
+    {
+        if(badgeType == "Gold")
+        {
+            fishingBadge = 3;
+            Debug.Log("Gold fishing badge awarded");
+        }
+        else if(badgeType == "Silver")
+        {
+            fishingBadge = 2;
+            Debug.Log("Silver fishing badge awarded");
+        }
+        else if(badgeType == "Bronze")
+        {
+            fishingBadge = 1;
+            Debug.Log("Bronze fishing badge awarded");
+        }
+        fishingFinishTime = currentTime;
+        Debug.Log("Fishing task ended at time: " + fishingFinishTime);
     }
     
 }
