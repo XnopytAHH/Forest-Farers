@@ -13,10 +13,6 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         TransitionManager.Instance.ChangeScene("GameScene");
-    }
-
-    public void VolumeChange(float volume)
-    {
-        AudioListener.volume = volume;
+        DatabaseManager.Instance.UpdateUserData(GameManager.Instance.currentPlayerID, GameManager.Instance.currentUser);
     }
 }

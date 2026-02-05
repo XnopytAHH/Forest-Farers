@@ -10,6 +10,7 @@ using Firebase.Auth;
 using Firebase.Extensions;
 using System.Linq.Expressions;
 using Firebase;
+using System.Collections;
 public class LoginAndRegisterManager : MonoBehaviour
 {
     [SerializeField]
@@ -121,8 +122,7 @@ public class LoginAndRegisterManager : MonoBehaviour
                 }
                 Debug.Log("Login successful");
                 GameManager.Instance.currentPlayerID = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-                DatabaseManager.Instance.RetrieveUser(GameManager.Instance.currentPlayerID);
-                TransitionManager.Instance.ChangeScene("MenuScene");
+                
             });
     }
     public void DevLogin()
@@ -194,4 +194,5 @@ public class LoginAndRegisterManager : MonoBehaviour
                 SwitchPanels();
             });
     }
+    
 }

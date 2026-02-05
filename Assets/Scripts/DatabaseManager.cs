@@ -7,6 +7,7 @@
 using UnityEngine;
 using Firebase.Database;
 using Firebase.Extensions;
+using UnityEngine.XR.Interaction.Toolkit.Utilities.Tweenables.SmartTweenableVariables;
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class DatabaseManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        db.RootReference.ValueChanged += dbValueChanged;
     }
     public void CreateUser(string userId, string username)
     {
@@ -51,5 +53,20 @@ public class DatabaseManager : MonoBehaviour
     {
         string json = JsonUtility.ToJson(userData);
         db.RootReference.Child("players").Child(userId).SetRawJsonValueAsync(json);
+    }
+    private void dbValueChanged(object sender, ValueChangedEventArgs args)
+    {
+        if (args.DatabaseError != null)
+        {
+            Debug.LogError("Database error: " + args.DatabaseError.Message);
+            return;
+        }
+        DataSnapshot snapshot = args.Snapshot;
+        if (GameManager.Instance.currentPlayerID == null) return;
+        snapshot = snapshot.Child("players").Child(GameManager.Instance.currentPlayerID);
+        string json = snapshot.GetRawJsonValue();
+        GameManager.Instance.currentUser = JsonUtility.FromJson<User>(json);
+        GameManager.Instance.currentUser.badges.UpdateBadgeValues();
+        
     }
 }
