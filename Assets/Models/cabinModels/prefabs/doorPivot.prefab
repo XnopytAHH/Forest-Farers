@@ -131,6 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8426584111706964991}
+  - component: {fileID: 7200101946142328005}
   m_Layer: 0
   m_Name: doorPivot
   m_TagString: Untagged
@@ -154,6 +155,27 @@ Transform:
   - {fileID: 534433653270768378}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7200101946142328005
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9090359992165744806}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0810225, y: 2.0801177, z: 0.20062494}
+  m_Center: {x: -0.502851, y: 1.0409291, z: -0.008980036}
 --- !u!1001 &1819930252705672885
 PrefabInstance:
   m_ObjectHideFlags: 0
