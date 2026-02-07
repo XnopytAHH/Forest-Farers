@@ -62,7 +62,7 @@ public class BookBehavior : MonoBehaviour
         {
             nextButton.SetActive(true);
         }
-        if (currentPage==2)
+        if (currentPage==1)
         {
             if (CampRun.Instance.cookingFinished)
             {
