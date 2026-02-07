@@ -8,6 +8,14 @@ public class TentBehaviour : MonoBehaviour
     [SerializeField]
     XRSocketInteractor[] pegPoints;
     int[] completion = new int[4];
+    void OnEnable()
+    {
+        PegBehavior.pegDriven += () => CampRun.Instance.EndCampingTask(CheckTentBadge().ToString());
+    }
+    void OnDisable()
+    {
+        PegBehavior.pegDriven -= () => CampRun.Instance.EndCampingTask(CheckTentBadge().ToString());
+    }
     public int CheckTentBadge()
     {
         int count = 0;

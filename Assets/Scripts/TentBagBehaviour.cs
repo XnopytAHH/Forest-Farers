@@ -15,6 +15,7 @@ public class TentBagBehaviour : MonoBehaviour
         tentObject.SetActive(false);
         
         spaceTester.SetActive(false);
+        
     }
 
     // Update is called once per frame
@@ -74,6 +75,7 @@ public class TentBagBehaviour : MonoBehaviour
                 item.SetActive(true);
                 GameObject tentItem=Instantiate(item, transform.position + new Vector3(3f, 1f, itemOffset), Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f));
                 tentItem.SetActive(true);
+                CampRun.Instance.EndCampingTask(tentItem.GetComponent<TentBehaviour>().CheckTentBadge().ToString());
             }
         
         waitingToPitch = false;

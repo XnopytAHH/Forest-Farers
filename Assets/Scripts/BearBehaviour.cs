@@ -8,6 +8,7 @@ public class BearBehaviour : MonoBehaviour
     [SerializeField] private GameObject ItemToGive; // The item that the bear will give to the player
     [SerializeField] private Transform ItemSpawnPoint; // Point where the item will be spawned
     [SerializeField] private float ItemGiveDelay = 1.0f; // Delay before giving the item
+    [SerializeField] private OptionsMenu optionsMenu;
 
     /// <summary>
     /// Initializes the bear's animator and sets the initial state.
@@ -18,7 +19,7 @@ public class BearBehaviour : MonoBehaviour
         {
             BearAnimator = GetComponent<Animator>();
         }
-        BearAnimator.SetBool("GivenItem", false); // Ensure the bear starts without having given the item
+        BearAnimator.SetBool("GivenItem", GameManager.Instance.currentUser.finishedTutorial); // Ensure the bear starts without having given the item
     }
 
     /// <summary>
@@ -55,5 +56,7 @@ public class BearBehaviour : MonoBehaviour
         yield return new WaitForSeconds(ItemGiveDelay);
         Instantiate(ItemToGive, ItemSpawnPoint.position, ItemSpawnPoint.rotation);
         BearAnimator.SetBool("GivenItem", true); // Item has been given
+        GameManager.Instance.currentUser.finishedTutorial = true;
+        optionsMenu.updateOptionsMenu();
     }
 }

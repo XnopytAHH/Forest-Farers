@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -5,12 +6,14 @@ public class PegBehavior : MonoBehaviour
 {
     public float progress = 0f;
     public GameObject pegAnchorPoint;
+    public static event Action pegDriven;
     public void DrivePeg()
     {
         if (progress < 3f)
         {
             progress += 1f;
             Change();
+            pegDriven?.Invoke();
         }
         else
         {

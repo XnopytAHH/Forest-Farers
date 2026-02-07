@@ -14,6 +14,17 @@ TagManager:
   - WetLog
   - WetLogSkinny
   - Score
+  - MenuBGM
+  - MenuSFX
+  - BookBGM
+  - BookSFX
+  - Name
+  - Height
+  - Highscore
+  - CampCount
+  - AMS
+  - HeightSetting
+  - OptionsMenu
   layers:
   - Default
   - TransparentFX

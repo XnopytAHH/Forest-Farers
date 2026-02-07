@@ -21,6 +21,10 @@ public class CampRun : MonoBehaviour
     public int fishingBadge = 0;
     public int tentBadge = 0;
     public int campfireBadge = 0;
+    public bool cookingFinished = false;
+    public bool fishingFinished = false;
+    public bool tentFinished = false;
+    public bool campfireFinished = false;
     public static CampRun Instance;
     public TentBehaviour tentBehaviour;
 
@@ -29,6 +33,7 @@ public class CampRun : MonoBehaviour
         Instance = this;
         skyboxMaterial.SetFloat("_Blend", 0f);
         currentTime = 0f;
+        
     }
     // Update is called once per frame
     void Update()
@@ -67,7 +72,7 @@ public class CampRun : MonoBehaviour
     void FinishDayCycle()
     {
         // Calculate cooking score
-        float badgeMultiplier = 1f;
+        float badgeMultiplier = 0f;
         if (cookingBadge == 3)
         {
             badgeMultiplier = 2f;
@@ -83,17 +88,7 @@ public class CampRun : MonoBehaviour
         float totalScore = (dayDuration-cookingFinishTime) * badgeMultiplier;
 
         // Calculate tent score
-        if (tentBehaviour.gameObject.activeSelf)
-        {
-            tentBadge = tentBehaviour.CheckTentBadge();
-        }
-        else
-        {
-            tentBadge = 0;
-        }
-        
-        tentFinishTime = currentTime;
-         badgeMultiplier = 1f;
+         badgeMultiplier = 0f;
         if (tentBadge == 3)
         {
             badgeMultiplier = 2f;
@@ -109,7 +104,7 @@ public class CampRun : MonoBehaviour
         totalScore += (dayDuration - tentFinishTime) * badgeMultiplier;
 
         //Calculate fishing score
-        badgeMultiplier = 1f;
+        badgeMultiplier = 0f;
         if (fishingBadge == 3)
         {
             badgeMultiplier = 2f;
@@ -124,7 +119,7 @@ public class CampRun : MonoBehaviour
         }
         totalScore += (dayDuration - fishingFinishTime) * badgeMultiplier;
         //Calculate campfire score
-        badgeMultiplier = 1f;
+        badgeMultiplier = 0f;
         if (campfireBadge == 3)
         {
             badgeMultiplier = 2f;
@@ -145,6 +140,7 @@ public class CampRun : MonoBehaviour
     }
     public void EndCookingTask(string badgeType)
     {
+        cookingFinished = true;
         cookingFinishTime = currentTime;
         if(badgeType == "Gold")
         {
@@ -164,8 +160,31 @@ public class CampRun : MonoBehaviour
         Debug.Log("Cooking task ended at time: " + cookingFinishTime);
         
     }
+    public void EndCampingTask(string badgeType)
+    {
+        tentFinished = true;
+        tentFinishTime = currentTime;
+        if(badgeType == "Gold")
+        {
+            tentBadge = 3;
+            Debug.Log("Gold tent badge awarded");
+        }
+        else if(badgeType == "Silver")
+        {
+            tentBadge = 2;
+            Debug.Log("Silver tent badge awarded");
+        }
+        else if(badgeType == "Bronze")
+        {
+            tentBadge = 1;
+            Debug.Log("Bronze tent badge awarded");
+        }
+        Debug.Log("Camping task ended at time: " + tentFinishTime);
+        
+    }
     public void EndCampfireTask(string badgeType)
     {
+        campfireFinished = true;
         campfireFinishTime = currentTime;
         if(badgeType == "Gold")
         {
@@ -187,6 +206,7 @@ public class CampRun : MonoBehaviour
     }
     public void EndFishingTask(string badgeType)
     {
+        fishingFinished = true;
         if(badgeType == "Gold")
         {
             fishingBadge = 3;
