@@ -22,7 +22,7 @@ public class User
         highscore = 0;
         badges = new Badges();
         antiMotionSickness = false;
-        height = 0;
+        height = 130;
         music = 0;
         sfx = 0;
     }

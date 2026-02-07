@@ -25,6 +25,11 @@ TagManager:
   - AMS
   - HeightSetting
   - OptionsMenu
+  - CampingBadge
+  - BackwoodsmanBadge
+  - AnglerBadge
+  - CookBadge
+  - UI Mover
   layers:
   - Default
   - TransparentFX
