@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class BookBehavior : MonoBehaviour
 {
     public int currentPage =0;
@@ -14,6 +15,7 @@ public class BookBehavior : MonoBehaviour
     [SerializeField] public GameObject fishingTick;
     [SerializeField] public GameObject cookingTick;
     [SerializeField] public GameObject campfireTick;
+    [SerializeField] public GameObject Blocker;
     
     void Awake()
     {
@@ -65,7 +67,14 @@ public class BookBehavior : MonoBehaviour
         }
         if (currentPage==1)
         {
-            if (CampRun.Instance.cookingFinished)
+            if(SceneManager.GetActiveScene().name=="MenuScene") 
+            {
+                Blocker.SetActive(true);
+            }
+            else
+            {
+                Blocker.SetActive(false);
+                if (CampRun.Instance.cookingFinished)
             {
                 cookingTick.SetActive(true);
             }
@@ -97,6 +106,8 @@ public class BookBehavior : MonoBehaviour
             {
                 campfireTick.SetActive(false);
             }
+            }
+            
         }
     }
     public void NextPage()

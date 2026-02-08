@@ -64,7 +64,7 @@ public class TentBagBehaviour : MonoBehaviour
     }
     IEnumerator pitchTentTimer()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
         tentObject.SetActive(true);
         tentObject.transform.parent = null;
