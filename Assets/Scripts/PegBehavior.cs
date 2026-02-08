@@ -14,6 +14,7 @@ public class PegBehavior : MonoBehaviour
             progress += 1f;
             Change();
             pegDriven?.Invoke();
+            gameObject.GetComponent<AudioPlayer>()?.PlayAudioClip("hammer");
         }
         else
         {

@@ -22,6 +22,7 @@ public class BookBehavior : MonoBehaviour
     }
     public void PickedUp()
     {
+        gameObject.GetComponent<AudioPlayer>()?.PlayAudioClip("pageturn");
         bookClosed.SetActive(false);
         bookOpen.SetActive(true);
         UpdatePages();
@@ -100,6 +101,7 @@ public class BookBehavior : MonoBehaviour
     }
     public void NextPage()
     {
+        gameObject.GetComponent<AudioPlayer>()?.PlayAudioClip("pageturn");
         if (currentPage < pageGroups.Length - 1)
         {
             currentPage++;
@@ -108,6 +110,7 @@ public class BookBehavior : MonoBehaviour
     }
     public void PreviousPage()
     {
+        gameObject.GetComponent<AudioPlayer>()?.PlayAudioClip("pageturn");
         if (currentPage > 0)
         {
             currentPage--;

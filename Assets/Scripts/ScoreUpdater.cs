@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEditorInternal;
 public class ScoreUpdater : MonoBehaviour
 {
     [SerializeField]

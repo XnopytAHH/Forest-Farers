@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
         {
             currentUser.badges.backwoodsman = campfireBadge;
         }
-        DatabaseManager.Instance.UpdateUserData(currentPlayerID, currentUser);
+        if (currentUser != null) DatabaseManager.Instance.UpdateUserData(currentPlayerID, currentUser);
         SceneManager.LoadScene("DayEndScene");
 
     }

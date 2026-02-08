@@ -158,8 +158,8 @@ public class FishingRodBehaviour : MonoBehaviour
         fishingRodBobber.GetComponent<Rigidbody>().useGravity = true;
         fishingRodBobber.transform.parent = null;
         isBobberCast = true;
-        // fishingRodBobber.transform.rotation = quaternion.identity;
-        //fishingRodBobber.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        gameObject.GetComponent<AudioPlayer>().PlayAudioClip("rodwhoosh");
+        fishingRodBobber.GetComponent<Rigidbody>().AddForce(castDirection.normalized * velocity * 20f);
 
     }
     void Uncast()
@@ -168,6 +168,7 @@ public class FishingRodBehaviour : MonoBehaviour
         isReelingIn = true;
         isWaitingForBite = false;
         StopAllCoroutines();
+        gameObject.GetComponent<AudioPlayer>().PlayAudioClip("reelspinning");
         StartCoroutine(ReelInBobber());
         //fishingRodBobber.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         rodUncast?.Invoke();
@@ -202,7 +203,7 @@ public class FishingRodBehaviour : MonoBehaviour
     {
         fishingRodBobber.GetComponent<ConfigurableJoint>().linearLimit = new SoftJointLimit { limit = 0.4f };
         isBobberCast = false;
-
+        gameObject.GetComponent<AudioPlayer>().StopAudio();
     }
     IEnumerator ReelInBobber()
     {
@@ -235,6 +236,7 @@ public class FishingRodBehaviour : MonoBehaviour
     public void FishBite()
     {
         currentFish = Instantiate(fishPrefab, fishingRodBobber.transform.position, Quaternion.identity);
+        gameObject.GetComponent<AudioPlayer>().PlayAudioClip("splash");
         escapeCoroutine = StartCoroutine(escapeTimer());
     }
     IEnumerator escapeTimer()

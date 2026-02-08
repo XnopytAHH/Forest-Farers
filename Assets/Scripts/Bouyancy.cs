@@ -51,6 +51,7 @@ public class Bouyancy : MonoBehaviour
     {
         if (toUnderwater)
         {
+            gameObject.GetComponent<AudioPlayer>()?.PlayAudioClip("splash");
             rb.linearDamping = underWaterDrag;
             rb.angularDamping = underWaterAngularDrag;
         }
