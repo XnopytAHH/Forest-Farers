@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Forest-Farers.slnx"
+    "dotnet.defaultSolution": "SmthCheesy-2.2-IP.slnx"
 }
