@@ -30,6 +30,7 @@ TagManager:
   - AnglerBadge
   - CookBadge
   - UI Mover
+  - AMSVolume
   layers:
   - Default
   - TransparentFX
