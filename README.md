@@ -5,11 +5,11 @@
 ## Overview
 Forest Farers is an Educational game focused on teaching children survival skills to survive in the wilderness. 
 ## Recommended System requirements
-Headset: Meta Quest 2
-Storage: 450mb available space
-Input: Quest Touch controllers required
-Play Area: Standing play recommended (minimum 1.5m x 1.5m)
-Internet: required (account services required to play)
+Headset: Meta Quest 2 <br>
+Storage: 450mb available space <br>
+Input: Quest Touch controllers required <br>
+Play Area: Standing play recommended (minimum 1.5m x 1.5m) <br>
+Internet: required (account services required to play) <br>
 ## Walkthrough
 ### <img src="Assets/Sprites/badgeTent.png" width="65" height="65"></img> Camper Badge
 The camper badge is achieved by pitching a tent
