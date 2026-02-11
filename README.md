@@ -65,11 +65,11 @@ The Cook Badge is achieved by cooking the fish over the campfire
 - Book UI is unpredictable, sometimes not being affected by the XR Controller Pokes
 
 ## Smth Cheesy - Team Members
-<img src="Assets/Sprites/scs.png" width="100" height="100"></img>
-<b> Lim En Xu, Jayson </b> (Team Lead and Lead Unity Programmer)
-<b> Emilie Tee Jing Hui </b>(Lead Graphic Designer and 3D Modeller)
-<b> Katriel Wong Shu Ning </b> (Environment Designer and Game Designer)
-<b> Andre Lim Zhe Kai </b> (Lead Web Developer)
+<img src="Assets/Sprites/scs.png" width="100" height="120"></img> <br>
+<b> Lim En Xu, Jayson </b> (Team Lead and Lead Unity Programmer) <br>
+<b> Emilie Tee Jing Hui </b>(Lead Graphic Designer and 3D Modeller) <br>
+<b> Katriel Wong Shu Ning </b> (Environment Designer and Game Designer)<br>
+<b> Andre Lim Zhe Kai </b> (Lead Web Developer)<br>
 ## Credits
 ### Art and Assets
 UI Kit - <a href="https://assetstore.unity.com/packages/2d/gui/buttons-set-211824">Buttons Set</a> by <a href="https://assetstore.unity.com/publishers/53314">KartInnka</a>
@@ -80,17 +80,17 @@ Crossfade Shader - <a href="https://guidohenkel.com/2013/04/a-simple-cross-fade-
 Guido Henkel</a>
 
 ### Audio
-Waterfall - waterfall by <a href="https://pixabay.com/users/freesound_community-46691455/">freesound_community</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a> 
-Campfire - Campfire in the Woods by <a href="https://pixabay.com/users/dragon-studio-38165424/">DRAGON-STUDIO</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a>
-Wind - Soft Wind by <a href="https://pixabay.com/users/storegraphic-49061086/">storegraphic</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a>
-Sticks - Sticks Hitting sticks by <a href="https://pixabay.com/users/freesound_community-46691455/">freesound_community</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a>
-Fishing rod - Simple Whoosh by <a href="https://pixabay.com/users/dragon-studio-38165424/">DRAGON-STUDIO</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a>
-Water Splash - Water splash by <a href="https://pixabay.com/users/freesound_community-46691455/">freesound_community</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a>
-Reeling sound - Fly Reel Fish Pulling Saricione by <a href="https://pixabay.com/users/freesound_community-46691455/">freesound_community</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a>
-Mallet sound - Hammer Steel Impact by <a href="https://pixabay.com/users/universfield-28281460/">Universfield</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a>
-Doorbell - Vintage Doorbell Ring Sound Effect by <a href="https://pixabay.com/users/waltermidnight-49207772/">WalterMidnight</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a>
+Waterfall - waterfall by <a href="https://pixabay.com/users/freesound_community-46691455/">freesound_community</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a> <br>
+Campfire - Campfire in the Woods by <a href="https://pixabay.com/users/dragon-studio-38165424/">DRAGON-STUDIO</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a><br>
+Wind - Soft Wind by <a href="https://pixabay.com/users/storegraphic-49061086/">storegraphic</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a><br>
+Sticks - Sticks Hitting sticks by <a href="https://pixabay.com/users/freesound_community-46691455/">freesound_community</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a><br>
+Fishing rod - Simple Whoosh by <a href="https://pixabay.com/users/dragon-studio-38165424/">DRAGON-STUDIO</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a><br>
+Water Splash - Water splash by <a href="https://pixabay.com/users/freesound_community-46691455/">freesound_community</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a><br>
+Reeling sound - Fly Reel Fish Pulling Saricione by <a href="https://pixabay.com/users/freesound_community-46691455/">freesound_community</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a><br>
+Mallet sound - Hammer Steel Impact by <a href="https://pixabay.com/users/universfield-28281460/">Universfield</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a><br>
+Doorbell - Vintage Doorbell Ring Sound Effect by <a href="https://pixabay.com/users/waltermidnight-49207772/">WalterMidnight</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a><br>
 Book - Turn A Page by <a href="https://pixabay.com/users/creatorshome-49707711/">CreatorsHome</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=236133">Pixabay</a>
 
 ### Libraries
-Firebase Database 
+Firebase Database <br>
 Firebase Auth
