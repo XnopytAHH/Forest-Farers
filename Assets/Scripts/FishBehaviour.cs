@@ -1,4 +1,9 @@
-
+/*
+* File Name: FishBehaviour.cs
+* Author: Lim En Xu Jayson
+* Date Created: 29/01/2026
+* Description: Fish behaviour script to handle cooking and UI.
+*/
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -7,21 +12,55 @@ using Unity.XR.CoreUtils;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
-using NUnit.Framework;
+
 
 public class FishBehaviour : MonoBehaviour
 {
+    /// <summary>
+    /// Indicates if the fish is hooked.
+    /// </summary>
     bool isHooked = true;
+    /// <summary>
+    /// Coroutine for cooking process.
+    /// </summary>
     private Coroutine cookingCoroutine;
+    /// <summary>
+    /// Cooking progress of the fish.
+    /// </summary>
     public float cookingProgress = 0f;
+    /// <summary>
+    /// Cooking duration parameters.
+    /// </summary>
     public float[] cookingDuration; // 0: perfectStart, 1: perfectEnd, 2: maxCookingTime
+    
+    /// <summary>
+    /// Slider UI for cooking progress.
+    /// </summary>
     public Slider cookingSlider;
+    /// <summary>
+    /// Canvas for cooking UI.
+    /// </summary>
     public Canvas cookingCanvas;
+    /// <summary>
+    /// Indicates if the fish is on the stick.
+    /// </summary>
     public bool onStick = false;
+    /// <summary>
+    /// Depth offset for UI positioning.
+    /// </summary>
     [SerializeField] private float depthOffset = 0.1f;
+    /// <summary>
+    /// RectTransform for the success area in the cooking UI.
+    /// </summary>
     [SerializeField] private RectTransform successArea;
+    /// <summary>
+    /// Materials for different cooking states of the fish.
+    /// </summary>
     [SerializeField] Material[] fishMaterials; // 0: raw, 1: cooked, 2: burnt
     
+    /// <summary>
+    /// Initializes the fish behaviour and cooking UI.
+    /// </summary>
     private void Start()
     {
         hideUI();
@@ -32,6 +71,9 @@ public class FishBehaviour : MonoBehaviour
         
 
     }
+    /// <summary>
+    /// Updates the cooking UI position and rotation.
+    /// </summary>
     private void Update()
     {
         if(onStick )
@@ -43,12 +85,18 @@ public class FishBehaviour : MonoBehaviour
             cookingCanvas.transform.position += dirToPlayer * depthOffset;
         }
     }
+    /// <summary>
+    /// Changes bools when unhooking the fish.
+    /// </summary>
     public void Unhook()
     {
         isHooked = false;
         transform.SetParent(null);
     }
-
+    /// <summary>
+    /// Handles trigger enter events for cooking.
+    /// </summary>
+    /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Campfire"))
@@ -56,6 +104,10 @@ public class FishBehaviour : MonoBehaviour
             cookingCoroutine = StartCoroutine(StartCookingCoroutine());
         }
     }
+    /// <summary>
+    /// Handles trigger exit events for cooking.
+    /// </summary>
+    /// <param name="other"></param>
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Campfire"))
@@ -67,17 +119,26 @@ public class FishBehaviour : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// Shows the cooking UI.
+    /// </summary>
     public void showUI()
     {
         cookingCanvas.enabled = true;
         Debug.Log("Showing UI");
     }
+    /// <summary>
+    /// Hides the cooking UI.
+    /// </summary>
     public void hideUI()
     {
         cookingCanvas.enabled = false;
         Debug.Log("Hiding UI");
     }
-
+    /// <summary>
+    /// Coroutine to handle the cooking process.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator StartCookingCoroutine()
     {
         while (cookingProgress < cookingDuration[2])
@@ -88,7 +149,10 @@ public class FishBehaviour : MonoBehaviour
         }
 
     }
-    
+    /// <summary>
+    /// Updates the cooking UI and fish material based on cooking progress.
+    /// </summary>
+    /// <param name="progress"></param>
     void updateUI(float progress)
     {
         cookingSlider.value = progress;
@@ -124,7 +188,9 @@ public class FishBehaviour : MonoBehaviour
             gameObject.GetNamedChild("eye_R").GetComponent<Renderer>().material = fishMaterials[0];
         }
     }
-    
+    /// <summary>
+    /// Destroys the fish object.
+    /// </summary>
     public void Escape()
     {
         Destroy(this.gameObject);

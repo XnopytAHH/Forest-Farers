@@ -1,3 +1,9 @@
+/*
+* File Name: TentBehaviour.cs
+* Author: Jayson Lim En Xu
+* Date Created: 04/02/2026
+* Description: Manages the behavior of a tent in the game.
+*/
 using System;
 using System.Collections.Specialized;
 using UnityEngine;
@@ -5,17 +11,33 @@ using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class TentBehaviour : MonoBehaviour
 {
+    /// <summary>
+    /// Array of XRSocketInteractors representing the peg points of the tent.
+    /// </summary>
     [SerializeField]
     XRSocketInteractor[] pegPoints;
+    /// <summary>
+    /// Array to track completion status of each peg.
+    /// </summary>
     int[] completion = new int[4];
+    /// <summary>
+    /// Subscribes to the pegDriven event when enabled to check tent badge completion.
+    /// </summary>
     void OnEnable()
     {
         PegBehavior.pegDriven += () => CampRun.Instance.EndCampingTask(CheckTentBadge().ToString());
     }
+    /// <summary>
+    /// Unsubscribes from the pegDriven event when disabled.
+    /// </summary>
     void OnDisable()
     {
         PegBehavior.pegDriven -= () => CampRun.Instance.EndCampingTask(CheckTentBadge().ToString());
     }
+    /// <summary>
+    /// Checks the tent badge completion based on the driven pegs.
+    /// </summary>
+    /// <returns></returns>
     public int CheckTentBadge()
     {
         int count = 0;

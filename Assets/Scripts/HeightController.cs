@@ -1,3 +1,9 @@
+/*
+* File Name: HeightController.cs
+* Author: Lim En Xu Jayson
+* Date Created: 08/02/2026
+* Description: Controls the height of the UI elements accordingly to player height.
+*/
 using UnityEngine;
 
 public class HeightController : MonoBehaviour

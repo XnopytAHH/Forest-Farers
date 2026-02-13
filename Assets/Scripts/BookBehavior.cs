@@ -1,3 +1,9 @@
+/*
+* File Name: BookBehavior.cs
+* Author: Lim En Xu Jayson
+* Date Created: 08/02/2026
+* Description: Handles the behavior of the instruction book in the game.
+*/
 using System;
 using UnityEngine;
 using TMPro;
@@ -5,16 +11,49 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class BookBehavior : MonoBehaviour
 {
+    /// <summary>
+    /// Current page index of the book.
+    /// </summary>
     public int currentPage =0;
+    /// <summary>
+    /// Array of page group GameObjects.
+    /// </summary>
     public GameObject[] pageGroups;
+    /// <summary>
+    /// Next page button GameObject.
+    /// </summary>
     public GameObject nextButton;
+    /// <summary>
+    /// Previous page button GameObject.
+    /// </summary>
     public GameObject previousButton;
+    /// <summary>
+    /// Model for the closed book.
+    /// </summary>
     [SerializeField] public GameObject bookClosed;
+    /// <summary>
+    ///   Model for the open book.
+    /// </summary>
     [SerializeField] public GameObject bookOpen;
+    /// <summary>
+    /// Tick mark for camping task.
+    /// </summary>
     [SerializeField] public GameObject campingTick;
+    /// <summary>
+    /// Tick mark for fishing task.
+    /// </summary>
     [SerializeField] public GameObject fishingTick;
+    /// <summary>
+    /// Tick mark for cooking task.
+    /// </summary>
     [SerializeField] public GameObject cookingTick;
+    /// <summary>
+    /// Tick mark for campfire task.
+    /// </summary>
     [SerializeField] public GameObject campfireTick;
+    /// <summary>
+    /// Blocker object to prevent interaction in certain scenes.
+    /// </summary>
     [SerializeField] public GameObject Blocker;
     
     void Awake()

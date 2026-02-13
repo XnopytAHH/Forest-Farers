@@ -1,12 +1,31 @@
+/*
+* File Name: PegBehavior.cs
+* Author: Jayson Lim En Xu
+* Date Created: 23/01/2026
+* Description: Manages the behavior of a peg in the game.
+*/
 using System;
 using UnityEditor;
 using UnityEngine;
 
 public class PegBehavior : MonoBehaviour
 {
+    /// <summary>
+    /// Progress of the peg being driven into the ground.
+    /// </summary>
     public float progress = 0f;
+    /// <summary>
+    /// Anchor point of the peg to adjust its position.
+    /// </summary>
     public GameObject pegAnchorPoint;
+    /// <summary>
+    /// Event triggered when the peg is driven.
+    /// </summary>
     public static event Action pegDriven;
+
+    /// <summary>
+    /// Drives the peg further into the ground.
+    /// </summary>
     public void DrivePeg()
     {
         if (progress < 3f)
@@ -21,6 +40,9 @@ public class PegBehavior : MonoBehaviour
             Debug.Log("Peg is fully driven down.");
         }
     }
+    /// <summary>
+    /// Updates the peg's position based on the current progress.
+    /// </summary>
     private void Change()
     {
         Debug.Log("Peg progress: " + progress);

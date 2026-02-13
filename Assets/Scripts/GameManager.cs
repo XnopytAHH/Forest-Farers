@@ -20,7 +20,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public string currentPlayerID;
+    /// <summary>
+    /// Current user data.
+    /// </summary>
     public User currentUser;
+    /// <summary>
+    /// Scores at the end of the day.
+    /// </summary>
     public int[] endDayScores;
     void Start()
     {

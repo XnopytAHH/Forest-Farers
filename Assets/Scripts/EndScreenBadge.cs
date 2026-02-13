@@ -1,3 +1,9 @@
+/*
+* File Name: EndScreenBadge.cs
+* Author: Lim En Xu Jayson
+* Date Created: 08/02/2026
+* Description: End screen badge class to handle badge UI elements.
+*/
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
@@ -5,18 +11,49 @@ using UnityEngine.AI;
 
 public class EndScreenBadge : MonoBehaviour
 {
+    /// <summary>
+    /// Name of the badge.
+    /// </summary>
     private string badgeName;
+    /// <summary>
+    /// Image representing the badge.
+    /// </summary>
     [SerializeField]
     Sprite badgeImage;
+    /// <summary>
+    /// Sprites for different badge levels.
+    /// </summary>
     [SerializeField]
     Sprite[] badgeSprites; // 0: Bronze, 1: Silver, 2: Gold
+
+    /// <summary>
+    /// Image component for the stitch.
+    /// </summary>
     Image stitch;
+    /// <summary>
+    /// Image component for the badge.
+    /// </summary>
     Image image;
+    /// <summary>
+    /// Prefab for the badge UI display.
+    /// </summary>
     [SerializeField]
     GameObject badgeUIPrefab;
+    /// <summary>
+    /// Active badge UI instance.
+    /// </summary>
     GameObject activeBadgeUI;
+    /// <summary>
+    /// Level of the badge earned.
+    /// </summary>
     public int badgeLevel;
+    /// <summary>
+    /// Level name of the badge (e.g., Bronze, Silver, Gold).
+    /// </summary>
     private string badgeLevelName;
+    /// <summary>
+    /// Initializes the badge UI elements based on the badge type and level.
+    /// </summary>
     private void Start()
     {
         stitch = transform.GetChild(0).GetComponent<Image>();
@@ -55,6 +92,9 @@ public class EndScreenBadge : MonoBehaviour
             }
         SetBadgeImage();
     }
+    /// <summary>
+    /// Sets the badge image and stitch based on the badge level.
+    /// </summary>
     public void SetBadgeImage()
     {
         if (badgeLevel >= 1 && badgeLevel <= 3)
@@ -67,6 +107,9 @@ public class EndScreenBadge : MonoBehaviour
             Debug.LogWarning("Invalid badge level: " + badgeLevel);
         }
     }
+    /// <summary>
+    /// Activates the badge UI display with relevant information.
+    /// </summary>
     public void activateBadgeUI()
     {
         activeBadgeUI = Instantiate(badgeUIPrefab, transform.position, Quaternion.identity, transform);
@@ -75,6 +118,9 @@ public class EndScreenBadge : MonoBehaviour
         activeBadgeUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = badgeLevelName;
         activeBadgeUI.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = DatabaseManager.Instance.GetHintForBadge(badgeName, badgeLevel);
     }
+    /// <summary>
+    /// Deactivates the badge UI display.
+    /// </summary>
     public void deactivateBadgeUI()
     {
         Destroy(activeBadgeUI);

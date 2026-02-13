@@ -13,24 +13,55 @@ using Firebase;
 using System.Collections;
 public class LoginAndRegisterManager : MonoBehaviour
 {
+    /// <summary>
+    /// TMP Input Field for login email.
+    /// </summary>
     [SerializeField]
     TMP_InputField loginEmailField;
+    /// <summary>
+    /// TMP Input Field for login password.
+    /// </summary>
     [SerializeField]
     TMP_InputField loginPasswordField;
+    /// <summary>
+    /// TMP Input Field for registration email.
+    /// </summary>
     [SerializeField]
     TMP_InputField registerEmailField;
+    /// <summary>
+    /// TMP Input Field for registration password.
+    /// </summary>
     [SerializeField]
     TMP_InputField registerPasswordField;
+    /// <summary>
+    /// TMP Input Field for username during registration.
+    /// </summary>
     [SerializeField]
     TMP_InputField usernameField;
+    /// <summary>
+    /// TMP Text to display login errors.
+    /// </summary>
     [SerializeField]
     TMP_Text loginErrorText;
+    /// <summary>
+    /// TMP Text to display registration errors.
+    /// </summary>
     [SerializeField]
     TMP_Text registerErrorText;
+    /// <summary>
+    /// GameObject for the login panel.
+    /// </summary>
     [SerializeField]
     GameObject loginPanel;
+    /// <summary>
+    /// GameObject for the registration panel.
+    /// </summary>
     [SerializeField]
     GameObject registerPanel;
+
+    /// <summary>
+    /// Initializes the login and registration panels.
+    /// </summary>
     void Start()
     {
         loginPanel.SetActive(true);
@@ -38,12 +69,18 @@ public class LoginAndRegisterManager : MonoBehaviour
         ClearLoginFields();
         ClearRegisterFields();
     }
+    /// <summary>
+    /// Clears all input fields and error messages.
+    /// </summary>
     public void ClearLoginFields()
     {
         loginEmailField.text = "";
         loginPasswordField.text = "";
         loginErrorText.text = "";
     }
+    /// <summary>
+    /// Clears all registration input fields and error messages.
+    /// </summary>
     public void ClearRegisterFields()
     {
         registerEmailField.text = "";
@@ -51,6 +88,9 @@ public class LoginAndRegisterManager : MonoBehaviour
         usernameField.text = "";
         registerErrorText.text = "";
     }
+    /// <summary>
+    /// Switches between the login and registration panels. 
+    /// </summary>
     public void SwitchPanels()
     {
         bool isLoginActive = loginPanel.activeSelf;
@@ -59,15 +99,26 @@ public class LoginAndRegisterManager : MonoBehaviour
         loginPanel.SetActive(!isLoginActive);
         registerPanel.SetActive(isLoginActive);
     }
+    /// <summary>
+    /// Displays registration error messages.
+    /// </summary>
+    /// <param name="message"></param>
     public void ShowRegisterError(string message)
     {
         registerErrorText.text = message;
     }
+    /// <summary>
+    /// Displays login error messages.
+    /// </summary>
+    /// <param name="message"></param>
 
     public void ShowLoginError(string message)
     {
         loginErrorText.text = message;
     }
+    /// <summary>
+    /// Handles user login process.
+    /// </summary>
     public void Login()
     {
         var email = loginEmailField.text;
@@ -126,6 +177,9 @@ public class LoginAndRegisterManager : MonoBehaviour
                 TransitionManager.Instance.ChangeScene("MenuScene");
             });
     }
+    /// <summary>
+    /// Developer login for testing purposes.
+    /// </summary>
     public void DevLogin()
     {
         var email = loginEmailField;
@@ -134,6 +188,9 @@ public class LoginAndRegisterManager : MonoBehaviour
         password.text="testing";
         Login();
     }
+    /// <summary>
+    /// Handles user registration process.
+    /// </summary>
     public void Signup()
     {
         // Obtain text from input fields

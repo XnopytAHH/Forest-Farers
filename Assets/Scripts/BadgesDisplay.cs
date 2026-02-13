@@ -9,8 +9,17 @@ using UnityEngine;
 
 public class BadgesDisplay : MonoBehaviour
 {
+    /// <summary>
+    /// List of GameObjects representing badge slots in the UI.
+    /// </summary>
     [SerializeField] private List <GameObject> BadgesSlots;
+    /// <summary>
+    /// List of Sprites representing badge icons.
+    /// </summary>
     [SerializeField] private List <Sprite> BadgesIcons;
+    /// <summary>
+    /// List of Sprites representing badge ranks.
+    /// </summary>
     [SerializeField] private List <Sprite> BadgesRanks;
 
     /// <summary>

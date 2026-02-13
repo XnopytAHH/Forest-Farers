@@ -1,3 +1,9 @@
+/*
+* File Name: TentBagBehaviour.cs
+* Author: Jayson Lim En Xu
+* Date Created: 01/02/2026
+* Description: Manages the behavior of a tent bag in the game.
+*/
 using UnityEngine;
 using System.Collections;
 public class TentBagBehaviour : MonoBehaviour

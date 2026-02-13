@@ -11,13 +11,34 @@ using System;
 
 public class DatabaseManager : MonoBehaviour
 {
+    /// <summary>
+    /// Firebase Database reference.
+    /// </summary>
     FirebaseDatabase db;
-    
+    /// <summary>
+    /// Singleton instance of DatabaseManager.
+    /// </summary>
     public static DatabaseManager Instance;
+    /// <summary>
+    /// Camping hints retrieved from the database.
+    /// </summary>
     public string[] campingHints;
+    /// <summary>
+    /// Fishing hints retrieved from the database.
+    /// </summary>
     public string[] fishingHints;
+    /// <summary>
+    /// Cooking hints retrieved from the database.
+    /// </summary>
     public string[] cookingHints;
+    /// <summary>
+    /// Campfire hints retrieved from the database.
+    /// </summary>
     public string[] campfireHints;
+
+    /// <summary>
+    /// Initializes the DatabaseManager and sets up database listeners.
+    /// </summary>
     public void Start()
     {
         db = FirebaseDatabase.DefaultInstance;
@@ -33,6 +54,9 @@ public class DatabaseManager : MonoBehaviour
         db.RootReference.ValueChanged += dbValueChanged;
         RetrieveHints();
     }
+    /// <summary>
+    /// Retrieves hints from the database and stores them in local arrays.
+    /// </summary>
     public void RetrieveHints()
     {
         db.RootReference.Child("hints").GetValueAsync().ContinueWithOnMainThread(task =>
@@ -62,6 +86,12 @@ public class DatabaseManager : MonoBehaviour
             
         });
     }
+    /// <summary>
+    /// Gets a hint for a specific badge and level.
+    /// </summary>
+    /// <param name="badgeName"></param>
+    /// <param name="badgeLevel"></param>
+    /// <returns></returns>
     public string GetHintForBadge(string badgeName, int badgeLevel)
     {
         if (badgeName=="Camper")
@@ -82,12 +112,21 @@ public class DatabaseManager : MonoBehaviour
         }
         return "No hint available.";
     }
+    /// <summary>
+    /// Creates a new user in the database.
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <param name="username"></param>
     public void CreateUser(string userId, string username)
     {
         User newUser = new User(username);
         string json = JsonUtility.ToJson(newUser);
         db.RootReference.Child("players").Child(userId).SetRawJsonValueAsync(json);
     }
+    /// <summary>
+    /// Retrieves user data from the database.
+    /// </summary>
+    /// <param name="userId"></param>
     public void RetrieveUser(string userId)
     {
         db.RootReference.Child("players").Child(userId).GetValueAsync().ContinueWithOnMainThread(task =>
@@ -103,12 +142,20 @@ public class DatabaseManager : MonoBehaviour
             GameManager.Instance.currentUser.badges.UpdateBadgeValues();
         });
     }
+    /// <summary>
+    /// Updates user data in the database.
+    /// </summary>
     public void UpdateUserData(string userId, User userData)
     {
         if (userData == null || userId == null || userId == "" ) return;
         string json = JsonUtility.ToJson(userData);
         db.RootReference.Child("players").Child(userId).SetRawJsonValueAsync(json);
     }
+    /// <summary>
+    /// Handles database value changes and updates the current user data.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
     private void dbValueChanged(object sender, ValueChangedEventArgs args)
     {
         if (args.DatabaseError != null)

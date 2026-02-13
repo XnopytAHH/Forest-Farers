@@ -1,3 +1,9 @@
+/*
+* File Name: CampfireActivity.cs
+* Author: Emilie Tee Jing Hui
+* Date Created: 22/01/2026
+* Description: Handles the behavior of the campfire activity in the game.
+*/
 using System.Collections.Generic;
 using System.Net.Sockets;
 using UnityEngine;

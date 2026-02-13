@@ -1,13 +1,35 @@
+/*
+* File Name: BearBehaviour.cs
+* Author: Emilie Tee Jing Hui
+* Date Created: 4/2/2026
+* Description: Handles the behaviour of the bear in the tutorial scene.
+*/
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class BearBehaviour : MonoBehaviour
+
 {
-    [SerializeField] private Animator BearAnimator; // Reference to the bear's animator component
-    [SerializeField] private GameObject ItemToGive; // The item that the bear will give to the player
-    [SerializeField] private Transform ItemSpawnPoint; // Point where the item will be spawned
-    [SerializeField] private float ItemGiveDelay = 1.0f; // Delay before giving the item
+    /// <summary>
+    /// Animator component for controlling bear animations.
+    /// </summary>
+    [SerializeField] private Animator BearAnimator; 
+    /// <summary>
+    /// The item that the bear will give to the player.
+    /// </summary>
+    [SerializeField] private GameObject ItemToGive; 
+    /// <summary>
+    /// The point where the item will be spawned.
+    /// </summary>
+    [SerializeField] private Transform ItemSpawnPoint;
+    /// <summary>
+    /// Delay before giving the item.
+    /// </summary>
+    [SerializeField] private float ItemGiveDelay = 1.0f;
+    /// <summary>
+    /// Reference to the options menu for updating settings.
+    /// </summary> 
     [SerializeField] private OptionsMenu optionsMenu;
 
     /// <summary>
