@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
+
 /*
 * File Name: CampfireRows.cs
 * Author: Lim En Xu Jayson
