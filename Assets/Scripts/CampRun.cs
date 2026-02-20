@@ -20,6 +20,7 @@ public class CampRun : MonoBehaviour
     /// <summary>
     /// Directional light representing the sun.
     /// </summary>
+    [SerializeField]
     GameObject sunSource;
     /// <summary>
     /// Skybox material for day-night transition.
@@ -119,6 +120,7 @@ public class CampRun : MonoBehaviour
     /// </summary>
     void LerpSunPosition()
     {
+        Debug.Log("Lerping sun position. Current time: " + currentTime);
         float normalizedTime = (currentTime % dayDuration) / dayDuration; // Normalize time to [0, 1]
         float sunAngle = normalizedTime * 180f;
         sunSource.transform.rotation = Quaternion.Euler(new Vector3(sunAngle, 90f, 0f));
